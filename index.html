@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Artiste</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Montserrat, sans-serif;
+background:#111;
+color:white;
+line-height:1.6;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.85);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+z-index:1000;
+}
+
+.logo{
+font-family:"Playfair Display";
+font-size:24px;
+}
+
+nav{
+display:flex;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#d4a373;
+}
+
+.menu-toggle{
+display:none;
+font-size:30px;
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background:url("https://images.unsplash.com/photo-1547891654-e66ed7ebb968") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero h1{
+font-family:"Playfair Display";
+font-size:60px;
+background:rgba(0,0,0,0.5);
+padding:20px 40px;
+}
+
+/* SECTIONS */
+
+section{
+padding:100px 10%;
+}
+
+.section-title{
+font-size:36px;
+margin-bottom:40px;
+font-family:"Playfair Display";
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.artwork{
+position:relative;
+cursor:pointer;
+}
+
+.artwork img{
+width:100%;
+height:300px;
+object-fit:cover;
+border-radius:10px;
+transition:0.4s;
+}
+
+.artwork:hover img{
+transform:scale(1.05);
+}
+
+.overlay{
+position:absolute;
+bottom:0;
+background:rgba(0,0,0,0.6);
+width:100%;
+padding:15px;
+opacity:0;
+transition:0.4s;
+border-radius:0 0 10px 10px;
+}
+
+.artwork:hover .overlay{
+opacity:1;
+}
+
+/* ABOUT */
+
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+border-radius:10px;
+}
+
+/* EXHIBITIONS */
+
+.exhibitions{
+background:#1b1b1b;
+}
+
+.exhibition-item{
+margin-bottom:20px;
+}
+
+/* CONTACT */
+
+.contact{
+text-align:center;
+}
+
+.contact input,
+.contact textarea{
+width:80%;
+max-width:500px;
+padding:12px;
+margin:10px;
+border:none;
+border-radius:5px;
+}
+
+button{
+padding:12px 30px;
+background:#d4a373;
+border:none;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:40px;
+background:black;
+margin-top:60px;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.menu-toggle{
+display:block;
+}
+
+nav{
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:black;
+flex-direction:column;
+display:none;
+text-align:center;
+padding:20px 0;
+}
+
+nav a{
+margin:15px 0;
+font-size:18px;
+}
+
+nav.active{
+display:flex;
+}
+
+.about{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Nom de l'Artiste</div>
+
+<div class="menu-toggle" id="menu-toggle">☰</div>
+
+<nav id="nav">
+<a href="#home">Accueil</a>
+<a href="#gallery">Galerie</a>
+<a href="#about">À propos</a>
+<a href="#exhibitions">Expositions</a>
+<a href="#contact">Contact</a>
+</nav>
+
+</header>
+
+<section id="home" class="hero">
+<h1>Peinture Contemporaine</h1>
+</section>
+
+<section id="gallery">
+
+<h2 class="section-title">Galerie</h2>
+
+<div class="gallery">
+
+<div class="artwork">
+<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
+<div class="overlay">Œuvre 1</div>
+</div>
+
+<div class="artwork">
+<img src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4">
+<div class="overlay">Œuvre 2</div>
+</div>
+
+<div class="artwork">
+<img src="https://images.unsplash.com/photo-1504198266285-165a3c84f27d">
+<div class="overlay">Œuvre 3</div>
+</div>
+
+<div class="artwork">
+<img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b">
+<div class="overlay">Œuvre 4</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="section-title">À propos de l'artiste</h2>
+
+<div class="about">
+
+<img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39">
+
+<div>
+
+<p>
+Artiste passionné par la couleur et la matière, mon travail explore les émotions et l’abstraction.
+</p>
+
+<p>
+Chaque œuvre est une recherche entre texture, lumière et mouvement.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="exhibitions" class="exhibitions">
+
+<h2 class="section-title">Expositions</h2>
+
+<div class="exhibition-item">
+<strong>2025</strong> — Galerie Moderne, Paris
+</div>
+
+<div class="exhibition-item">
+<strong>2024</strong> — Salon des Artistes Contemporains
+</div>
+
+<div class="exhibition-item">
+<strong>2023</strong> — Exposition Collective, Marseille
+</div>
+
+</section>
+
+<section id="contact" class="contact">
+
+<h2 class="section-title">Contact</h2>
+
+<input type="text" placeholder="Nom"><br>
+<input type="email" placeholder="Email"><br>
+<textarea rows="5" placeholder="Message"></textarea><br>
+
+<button>Envoyer</button>
+
+</section>
+
+<footer>
+© 2026 Portfolio Artiste
+</footer>
+
+<div class="lightbox" id="lightbox">
+<img id="lightbox-img">
+</div>
+
+<script>
+
+const toggle = document.getElementById("menu-toggle")
+const nav = document.getElementById("nav")
+
+toggle.addEventListener("click",()=>{
+nav.classList.toggle("active")
+})
+
+const artworks = document.querySelectorAll(".artwork img")
+const lightbox = document.getElementById("lightbox")
+const lightboxImg = document.getElementById("lightbox-img")
+
+artworks.forEach(img=>{
+img.addEventListener("click",()=>{
+lightbox.style.display="flex"
+lightboxImg.src=img.src
+})
+})
+
+lightbox.addEventListener("click",()=>{
+lightbox.style.display="none"
+})
+
+</script>
+
+</body>
+</html>
