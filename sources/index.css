@@ -61,12 +61,15 @@ nav a:hover{
 	justify-content:center;
 	text-align:center;
 }
+.hero .title_container{
+	width: 100%;
+	background:rgba(0,0,0,0.5);
 
+}
 .hero h1{
-	margin: auto;
 	font-family:"Playfair Display";
 	font-size:60px;
-	background:rgba(0,0,0,0.5);
+	
 	padding:20px 40px;
 }
 
@@ -120,6 +123,9 @@ section{
 
 .artwork:hover .overlay{
 	opacity:1;
+	width:100%;
+	transform:scale(1.05);
+	margin: auto;
 }
 
 /* ABOUT */
@@ -178,6 +184,16 @@ footer{
 	padding:40px;
 	background:black;
 	margin-top:60px;
+}
+footer .social{
+	padding-top: 10px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+footer .social img{
+	width: 30px;
+	height:30px;
 }
 
 /* LIGHTBOX */

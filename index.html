@@ -1,3 +1,22 @@
+<!-- <?php
+require "db.php";
+
+$result = "SELECT * FORM database";
+
+echo "<table border='1'>";
+echo "<tr><th>Titre</th><th>Status</th><th>Dimensions</th><th>Date</th><th>Lien</th><th>Prix</th></tr>";
+
+foreach ($result as $row){
+	echo "<tr>";
+	echo "<td>".$row['titre']."</td>";
+	echo "<td>".$row['date']."</td>";
+	echo "<td>".$row['taille']."</td>";
+	echo "<td>".$row['lien']."</td>";
+	echo "<td>".$row['vendu']."</td>";
+	echo "<td>".$row['prix']."</td>";
+}
+?> -->
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -7,14 +26,14 @@
 	<title>Portfolio Artiste</title>
 
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="sources/index.css">
 
 </head>
 
 <body>
 
 	<header>
-		<div class="logo">Nom de l'Artiste</div>
+		<div class="logo">Agnes Couret</div>
 		<div class="menu-toggle" id="menu-toggle">☰</div>
 		<nav id="nav">
 			<a href="#home">Accueil</a>
@@ -27,7 +46,7 @@
 
 	<section id="home" class="hero">
 		<div class="title_container">
-			<h1>Peinture Contemporaine</h1>
+			<h1>Agnes Couret</h1>
 		</div>
 	</section>
 
@@ -103,7 +122,21 @@
 	</section>
 
 	<footer>
-		© 2026 Portfolio Artiste
+		<div class="tag">
+			© 2026 Portfolio Artiste
+		</div>
+		<div class="social">
+			<a href="#" class="facebook">
+				<img src="./sources/imgs/facebook.png" alt="">
+			</a>
+			<a href="#" class="instagram">
+				<img src="./sources/imgs/instagram.png" alt="">
+			</a>
+			<a href="#" class="art_majeur">
+				<img src="./sources/imgs/facebook.png" alt="">
+			</a>
+		</div>
+
 	</footer>
 
 	<div class="lightbox" id="lightbox">
