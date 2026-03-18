@@ -26,6 +26,7 @@ foreach ($result as $row){
 	<title>Portfolio Artiste</title>
 
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="sources/hearder_and_body.css">
 	<link rel="stylesheet" href="sources/index.css">
 
 </head>
@@ -47,6 +48,7 @@ foreach ($result as $row){
 	<section id="home" class="hero">
 		<div class="title_container">
 			<h1>Agnes Couret</h1>
+			<p>Entrez et laissez vous raconter....</p>
 		</div>
 	</section>
 
@@ -55,10 +57,12 @@ foreach ($result as $row){
 
 		<div class="gallery">
 
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
-				<div class="overlay">Œuvre 1</div>
-			</div>
+			<a href="./colection.html">	
+				<div class="artwork">
+					<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
+					<div class="overlay">Mamipheres</div>
+				</div>
+			</a>
 
 			<div class="artwork">
 				<img src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4">
@@ -81,33 +85,109 @@ foreach ($result as $row){
 		<h2 class="section-title">À propos de l'artiste</h2>
 
 		<div class="about">
-			<img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39">
+			<img src="sources/imgs/agnes.jpg">
 			<div>
 				<p>
-				Artiste passionné par la couleur et la matière, mon travail explore les émotions et l’abstraction.
+					Agnès Couret développe un univers singulier où la pierre brute rencontre la délicatesse du monde animal, 
+					créant des œuvres en mosaïque qui célèbrent la beauté sauvage et la poésie des matières naturelles.<br>
+					Son parcours artistique s'inscrit dans une trajectoire peu conventionnelle. 
+					Après de longues années dédiées à la musique, où elle a cultivé sa sensibilité artistique , 
+					Agnès opère un tournant décisif en se tournant vers la mosaïque. <br>Ce changement de discipline n'est pas 
+					une rupture mais plutôt une continuité : elle transpose dans la matière cette même recherche d'équilibre, 
+					de composition et d'émotion qu'elle explorait par le son.Autodidacte passionnée, elle construit sa pratique
+					pas à pas, animée par une soif d'apprentissage insatiable. <br>
+					<br>
+					Elle se forme à travers différents stages qui 
+					lui permettent de découvrir un éventail de techniques, dont la mosaïque en relief, une approche qui donne 
+					vie et volume à ses créations. Cette quête de savoir-faire l'amène à explorer sans cesse de nouvelles voies,
+					refusant de se cantonner aux méthodes traditionnelles.C'est la rencontre des matières qui nourrit son 
+					inspiration. Attirée par la beauté brute et organique de la pierre naturelle, autant que par la 
+					transparence lumineuse et la fragilité du verre, Agnès aime orchestrer ces matériaux contrastés dans des 
+					portraits animaliers saisissants. Ses œuvres capturent l'essence de ses sujets : la force tranquille d'un 
+					oiseau, l'intensité d'un regard, la grâce d'une posture. Dans chaque mosaïque, elle parvient à insuffler 
+					une présence, une âme.Son approche créative se caractérise par une curiosité sans limites et un goût
+					prononcé pour l'expérimentation. Loin des sentiers battus, elle cherche activement à découvrir et à
+					pratiquer des techniques peu usitées dans le domaine de la mosaïque. 
+					<br><br>
+					Elle détourne volontiers des 
+					matériaux de leur usage premier, transformant l'inattendu en composantes essentielles de son vocabulaire 
+					plastique. Cette audace lui permet de repousser les frontières de son art et de créer des pièces 
+					résolument originales.À travers son travail, Agnès Couret nous invite à porter un regard renouvelé 
+					sur le monde animal et sur la matière elle-même, révélant dans chaque fragment de pierre ou de verre 
+					une part de beauté insoupçonnée. 
 				</p>
 
 				<p>
-				Chaque œuvre est une recherche entre texture, lumière et mouvement.
+				Chaque œuvre est une recherche entre texture, lumière et mouvement.<br>
 				</p>
 			</div>
 		</div>
 	</section>
 
 	<section id="exhibitions" class="exhibitions">
+		<div class="section">
 
-		<h2 class="section-title">Expositions</h2>
-		<div class="exhibition-item">
-			<strong>2025</strong> — Galerie Moderne, Paris
+			<h2 class="section-title">Prix et recompenses</h2>
+			<div class="exhibition-item">
+				<strong>2025</strong> — Galerie Moderne, Paris
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2024</strong> — Salon des Artistes Contemporains
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2023</strong> — Exposition Collective, Marseille
+			</div>
+		</div>
+		<div class="section">
+
+			<h2 class="section-title">Expositions solo</h2>
+			<div class="exhibition-item">
+				<strong>2025</strong> — Galerie Moderne, Paris
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2024</strong> — Salon des Artistes Contemporains
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2023</strong> — Exposition Collective, Marseille
+			</div>
 		</div>
 
-		<div class="exhibition-item">
-			<strong>2024</strong> — Salon des Artistes Contemporains
+	<div class="section">
+
+			<h2 class="section-title">Expositions collectives</h2>
+			<div class="exhibition-item">
+				<strong>2025</strong> — Galerie Moderne, Paris
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2024</strong> — Salon des Artistes Contemporains
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2023</strong> — Exposition Collective, Marseille
+			</div>
+		</div>
+	
+	<div class="section">
+
+			<h2 class="section-title">Publications et presse</h2>
+			<div class="exhibition-item">
+				<strong>2025</strong> — Galerie Moderne, Paris
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2024</strong> — Salon des Artistes Contemporains
+			</div>
+			
+			<div class="exhibition-item">
+				<strong>2023</strong> — Exposition Collective, Marseille
+			</div>
 		</div>
 
-		<div class="exhibition-item">
-			<strong>2023</strong> — Exposition Collective, Marseille
-		</div>
 	</section>
 
 	<section id="contact" class="contact">

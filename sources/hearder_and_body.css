@@ -1,0 +1,52 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Montserrat, sans-serif;
+background:#111;
+color:white;
+line-height:1.6;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.85);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+z-index:1000;
+}
+
+.logo{
+	font-family:"Playfair Display";
+	font-size:24px;
+}
+
+nav{
+	display:flex;
+}
+
+nav a{
+	color:white;
+	text-decoration:none;
+	margin-left:25px;
+	transition:0.3s;
+}
+
+nav a:hover{
+	color:#d4a373;
+}
+
+.menu-toggle{
+	display:none;
+	font-size:30px;
+	cursor:pointer;
+}
