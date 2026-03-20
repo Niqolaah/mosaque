@@ -12,17 +12,9 @@
 
 </head>
 <body>
-    <header>
-		<div class="logo">Agnes Couret</div>
-		<div class="menu-toggle" id="menu-toggle">☰</div>
-		<nav id="nav">
-			<a href="index.html">Accueil</a>
-			<a href="colection.html">Galerie</a>
-			<a href="#about">À propos</a>
-			<a href="#exhibitions">Expositions</a>
-			<a href="#contact">Contact</a>
-		</nav>
-	</header>
+    <?php 
+		include("header.php")
+	?>
     <section class="banner">
         <h1>Collection Mamipheres</h1>
         <p>
@@ -41,11 +33,14 @@
     </section>
     <section class="gallery">
         <div class="gallery-container">
-            <a href="product.html">
+            <a href="product.php">
                 <figure>
                     <img src="sources/imgs/gorille.jpg" alt="Lorem ipsum dolor sit amet">
                     <figcaption>
-                        <h3>Mountains</h3>
+                        <div class="overlay-content">
+                            <h3>Gorille</h3>
+                            <p>En savoir plus ...</p>
+                        </div>
                     </figcaption>
                 </figure>
             </a>
@@ -69,7 +64,7 @@
                     <h3>Mountains</h3>
                 </figcaption>
             </figure>
-            <figure>z
+            <figure>
                 <img src="sources/imgs/felin.jpg" alt="Lorem ipsum dolor sit amet">
                 <figcaption>
                     <h3>Mountains</h3>

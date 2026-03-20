@@ -1,21 +1,9 @@
-<!-- <?php
-require "db.php";
 
-$result = "SELECT * FORM database";
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
 
-echo "<table border='1'>";
-echo "<tr><th>Titre</th><th>Status</th><th>Dimensions</th><th>Date</th><th>Lien</th><th>Prix</th></tr>";
-
-foreach ($result as $row){
-	echo "<tr>";
-	echo "<td>".$row['titre']."</td>";
-	echo "<td>".$row['date']."</td>";
-	echo "<td>".$row['taille']."</td>";
-	echo "<td>".$row['lien']."</td>";
-	echo "<td>".$row['vendu']."</td>";
-	echo "<td>".$row['prix']."</td>";
-}
-?> -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,18 +20,9 @@ foreach ($result as $row){
 </head>
 
 <body>
-
-	<header>
-		<div class="logo">Agnes Couret</div>
-		<div class="menu-toggle" id="menu-toggle">☰</div>
-		<nav id="nav">
-			<a href="index.html">Accueil</a>
-			<a href="colection.html">Galerie</a>
-			<a href="#about">À propos</a>
-			<a href="#exhibitions">Expositions</a>
-			<a href="#contact">Contact</a>
-		</nav>
-	</header>
+	<?php 
+		include("header.php")
+	?>
 
 	<section id="home" class="hero">
 		<div class="title_container">
@@ -56,8 +35,7 @@ foreach ($result as $row){
 		<h2 class="section-title">Galerie</h2>
 
 		<div class="gallery">
-
-			<a href="./colection.html">	
+			<a href="./collection.php">	
 				<div class="artwork">
 					<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
 					<div class="overlay">Mamipheres</div>

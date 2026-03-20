@@ -1,44 +1,56 @@
+
+h1
+{
+	text-align: center;
+	font-family:"Playfair Display";
+	font-size: 40px;
+	padding: 20px;
+}
+.img-container{
+	margin: auto;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-color: rgb(27, 27, 27);
+}
+img{
+	margin: auto;
+	max-height: 70vh;
+	padding: 20px;
+}
 .product{
 	width: 100%;
-	padding: 50px;
-}
-.product .img-container{
-	width: 40%;
-	margin: auto;
-}
-.product img{
-	margin: auto;
-	width: 100%;
+	padding: 80px;
 }
 
-.title-container{
+.btns-container{
 	display: flex;
 	margin: 50px 0;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	
 
 }
-.title-container h1{
+.btns-container h1{
 	margin: 0 50px;
 	font-family: "Playfair Display";
 }
-.title-container a 
+.btns-container a 
 {
 	text-decoration: none;
 	color: white;
 }
-.title-container .product-btn-content * {
+.btns-container .btn * {
   position: relative;
   z-index: 1;
 }
-.title-container .product-btn-content{
+.btns-container .btn{
 	padding: 10px 20px;
 	background-color:blueviolet;
 	margin: 0 50px;
 	position: relative;
 }
-.title-container .product-btn-content::before {
+.btns-container .btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -53,12 +65,13 @@
 
   transition: transform 0.4s ease; /* 👈 ici */
 }
-.title-container a:hover .product-btn-content::before{
+.btns-container a:hover .btn::before{
   transform: scaleX(1);
 }
 
 table{
 	width: 90vw;
+	max-width: 1200px;
 	padding: 50px;
 	margin: auto;
 }
@@ -66,8 +79,11 @@ th {
 	text-align: start;
 	width: 20%;
 	border-bottom: 1px white solid;
-	padding: 10px 0;
+	padding: 20px 20px;
 }
 td{
 	padding: 20px 0;
+}
+.dimensions-th{
+	min-width: 120px;
 }

@@ -12,26 +12,23 @@
 
 </head>
 <body>
-	<header>
-		<div class="logo">Agnes Couret</div>
-		<div class="menu-toggle" id="menu-toggle">☰</div>
-		<nav id="nav">
-			<a href="index.html">Accueil</a>
-			<a href="colection.html">Galerie</a>
-			<a href="#about">À propos</a>
-			<a href="#exhibitions">Expositions</a>
-			<a href="#contact">Contact</a>
-		</nav>
-	</header>
+	<?php 
+		include("header.php")
+	?>
 
+	<h1>Gare au Gorille</h1>
+	<div class="img-container">
+		<img src="sources/imgs/gorille.jpg" alt="">
+	</div>
 	<section class="product">
-		<div class="img-container">
-			<img src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed" alt="">
-		</div>
-		<div class="title-container">
-			<h1>Titre</h1>
+		<div class="btns-container">
 			<a href="#">
-				<div class="product-btn-content">
+				<div class="btn back-btn-content">
+					<p>Retour a la gallerie</p>
+				</div>
+			</a>
+			<a href="#">
+				<div class="btn product-btn-content">
 					<p>lien vers Art Majeur</p>
 				</div>
 			</a>
@@ -46,7 +43,7 @@
 					<th scope="col">Annee</th>
 					<th scope="col">Categorie</th>
 					<th scope="col">Prix</th>
-					<th scope="col">Dimensions</th>
+					<th scope="col" class="dimensions-th">Dimensions</th>
 					
 				</tr>
 			</thead>

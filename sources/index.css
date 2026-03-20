@@ -212,4 +212,10 @@ footer .social img{
 	.hero h1{
 		font-size:40px;
 	}
+	.about {
+		padding: 10px;
+	}
+	.about img{
+		width: 80vw;
+	}
 }
