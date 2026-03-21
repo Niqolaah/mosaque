@@ -1,3 +1,9 @@
+<?php
+ error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require __DIR__ . '/sources/db/db.php'
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,35 +19,48 @@
 </head>
 <body>
 	<?php 
-		include("header.php")
+		include("header.php");
+
+        $product_id = (int) $_GET['link'] ?? null;
+        if (!$product_id) {
+            die("Aucune tableau correspondant");
+        }
+        $stmt_prod = $pdo->prepare("SELECT * FROM tableaux WHERE id_product = ?");
+        $stmt_prod->execute([$product_id]);
+
+        $product = $stmt_prod->fetch(PDO::FETCH_ASSOC);
 	?>
 
-	<h1>Gare au Gorille</h1>
+	<h1><?= $product["name"]?></h1>
 	<div class="img-container">
-		<img src="sources/imgs/gorille.jpg" alt="">
+		<img src="sources/imgs/<?= $product["img_link"]?>" alt="">
 	</div>
 	<section class="product">
 		<div class="btns-container">
-			<a href="#">
+			<a href="collection.php?category=<?= $product["id_category"]?>">
 				<div class="btn back-btn-content">
 					<p>Retour a la gallerie</p>
 				</div>
 			</a>
-			<a href="#">
+			<?php if ($product["status"] == "unsold"):?>
+			<a href="<?= $product["art_majeur_link"]?>">
 				<div class="btn product-btn-content">
 					<p>lien vers Art Majeur</p>
 				</div>
 			</a>
+			<?php else: ?>
+				<div class="btn sold-btn">
+					<p>Vendu</p>
+				</div>
+			<?php endif ?>
 		</div>
-		<p>Cette sculpture d'Agnès Couret représente la tête d'un singe, capturée avec une expressivité saisissante. L'artiste utilise des fragments de pierre naturelle, les assemblant méticuleusement pour créer des textures contrastées. Le pelage est rendu par de fines lamelles d'ardoise sombre, évoquant une fourrure dense et hérissée, tandis que le visage, les oreilles et le museau sont formés de pièces de pierre plus claires et lisses, agencées en mosaïque. Les yeux, d'un orange ambré lumineux, apportent une profondeur et une vivacité remarquables à l'œuvre, invitant au regard.
-		</p>
+		<p><?= $product["description"]?></p>
 
 		<table>
 			<thead>
 				<tr>
 					<th scope="col">Nom</th>
 					<th scope="col">Annee</th>
-					<th scope="col">Categorie</th>
 					<th scope="col">Prix</th>
 					<th scope="col" class="dimensions-th">Dimensions</th>
 					
@@ -49,11 +68,10 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>Titre</td>
-					<td>2035</td>
-					<td>Mamipheres</td>
-					<td>8000</td>
-					<td>50cm x 50cm </td>
+					<td><?= $product["name"]?></td>
+					<td><?= $product["year"]?></td>
+					<td><?= $product["price"]?>€</td>
+					<td><?= $product["size"]?> </td>
 				</tr>
 			</tbody>
 		</table>

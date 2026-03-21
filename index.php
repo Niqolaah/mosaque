@@ -1,7 +1,7 @@
-
 <?php
-error_reporting(E_ALL);
+ error_reporting(E_ALL);
 ini_set('display_errors', 1);
+require __DIR__ . '/sources/db/db.php'
 ?>
 
 
@@ -33,29 +33,18 @@ ini_set('display_errors', 1);
 
 	<section id="gallery">
 		<h2 class="section-title">Galerie</h2>
-
 		<div class="gallery">
-			<a href="./collection.php">	
-				<div class="artwork">
-					<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
-					<div class="overlay">Mamipheres</div>
-				</div>
-			</a>
-
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4">
-				<div class="overlay">Œuvre 2</div>
-			</div>
-
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1504198266285-165a3c84f27d">
-				<div class="overlay">Œuvre 3</div>
-			</div>
-
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b">
-				<div class="overlay">Œuvre 4</div>
-			</div>
+			<?php
+				$sql = "SELECT * FROM category";
+				$produits = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($produits as $produit): ?>
+				<a href="./collection.php?category=<?= $produit['id_category'] ?>">	
+					<div class="artwork">
+						<img src="sources/imgs/<?= $produit["img_link"] ?>">
+						<div class="overlay"><?= $produit['name'] ?></div>
+					</div>
+				</a>
+			<?php endforeach; ?>
 		</div>
 	</section>
 
