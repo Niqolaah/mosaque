@@ -31,13 +31,14 @@ require __DIR__ . '/sources/db/db.php'
 		</div>
 	</section>
 
-	<section id="gallery">
+	<section class="gallery-container">
 		<h2 class="section-title">Galerie</h2>
 		<div class="gallery">
 			<?php
 				$sql = "SELECT * FROM category";
 				$produits = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 			foreach ($produits as $produit): ?>
+				<h2>Collection <?= $produit["name"]?></h2>
 				<a href="./collection.php?category=<?= $produit['id_category'] ?>">	
 					<div class="artwork">
 						<img src="sources/imgs/<?= $produit["img_link"] ?>">
@@ -92,69 +93,75 @@ require __DIR__ . '/sources/db/db.php'
 	</section>
 
 	<section id="exhibitions" class="exhibitions">
-		<div class="section">
-
-			<h2 class="section-title">Prix et recompenses</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
+		<div class="pair">
+			<div class="section">
+				<h2 class="section-title">Prix et recompenses</h2>
+				
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				
 			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
-			</div>
-		</div>
-		<div class="section">
-
-			<h2 class="section-title">Expositions solo</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
+			<div class="section">
+				<h2 class="section-title">Expositions solo</h2>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
 			</div>
 		</div>
 
-	<div class="section">
+		<div class="pair">
+			<div class="section">
+				<h2 class="section-title">Expositions collectives</h2>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
+			</div>
+			
+			<div class="section">
 
-			<h2 class="section-title">Expositions collectives</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
+				<h2 class="section-title">Publications et presse</h2>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
 			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
-			</div>
-		</div>
-	
-	<div class="section">
-
-			<h2 class="section-title">Publications et presse</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
-			</div>
-		</div>
-
+		</div>	
 	</section>
 
 	<section id="contact" class="contact">
@@ -197,21 +204,6 @@ require __DIR__ . '/sources/db/db.php'
 		toggle.addEventListener("click",()=>{
 		nav.classList.toggle("active")
 		})
-
-		const artworks = document.querySelectorAll(".artwork img")
-		const lightbox = document.getElementById("lightbox")
-		const lightboxImg = document.getElementById("lightbox-img")
-
-		artworks.forEach(img=>{
-			img.addEventListener("click",()=>{
-				lightbox.style.display="flex"
-				lightboxImg.src=img.src
-			})
-		})
-
-		lightbox.addEventListener("click",()=>{
-			lightbox.style.display="none"
-		})
 	</script>
-	</body>
+</body>
 </html>

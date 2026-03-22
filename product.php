@@ -43,7 +43,7 @@ require __DIR__ . '/sources/db/db.php'
 				</div>
 			</a>
 			<?php if ($product["status"] == "unsold"):?>
-			<a href="<?= $product["art_majeur_link"]?>">
+			<a href="<?= $product["art_majeur_link"]?>" target="_blank" rel="noopener noreferrer">
 				<div class="btn product-btn-content">
 					<p>lien vers Art Majeur</p>
 				</div>
