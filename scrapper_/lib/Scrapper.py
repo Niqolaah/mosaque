@@ -9,9 +9,11 @@ from selenium.webdriver.common.by import By
 from time import sleep
 from .ParsedData import ParsedData
 from .Parser import Parser
-from.Errors import ParseError
+from.Errors import ParseError, CloudflairError
 
 from typing import Any
+import time
+import random
 
 
 class Scrapper:
@@ -20,13 +22,20 @@ class Scrapper:
 
     def scrap(self):
         url = "https://www.artmajeur.com/agnes-couret"
-        self.scrap_works_categories(url)
-        self.scrap_works(url)
+        try:
+            self.scrap_works_categories(url)
+            self.scrap_works(url)
+            self.__works.print_work_list()
+        except CloudflairError as e:
+            raise CloudflairError(e)
 
     def scrap_works(self, url: str) -> None:
         url_list = self.__works.get_links_list()
-        for url in url_list:
-            driver = self.__get_site(url)
+        for i, url in enumerate(url_list):
+            try:
+                driver = self.__get_site(url)
+            except CloudflairError:
+                raise CloudflairError(f"Cloudflair error at {url}")
 
             try:
                 name = Parser.get_work_name(driver)
@@ -49,27 +58,25 @@ class Scrapper:
             except ParseError:
                 year = ""
 
-            print(f"Name: {name}")
-            print(f"Price: {price}$")
-            print(f"Size: {size}")
-            print(f"Year: {year}")
-            print(f"Description: {description}")
-
+            
             self.__works.update_work_by_url(
                 url=url, name=name, year=year, size=size, price=price,
                 description=description
             )
             driver.quit()
+            print(f"Scrapped: {i+1}/{len(url_list)}")
             sleep(1)
-        self.__works.print_work_list()
 
     def scrap_works_categories(self, url: str) -> None:
-        driver = self.__get_site(url, visibility=True)
+        try:
+            driver = self.__get_site(url, visibility=True)
+        except CloudflairError:
+            raise CloudflairError("Cloudflair Error at categories collecting")
 
         categories_container = driver.find_element(By.CSS_SELECTOR,
                                                    "#carousel_container")
         categories_elm = categories_container.find_elements(By.CSS_SELECTOR, ".py-4")
-        print(f"Nombre trouve: {len(categories_elm)}")
+        print(f"{len(categories_elm)} categories found")
 
         for categorie in categories_elm:
             cate_name = Parser.get_cate_name(categorie)
@@ -88,23 +95,39 @@ class Scrapper:
         driver.quit()
         sleep(2)
 
-    def __get_site(self, url: str, visibility: bool = True) -> Any:
-        options = uc.ChromeOptions()
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        if not visibility:
-            options.add_argument('headless')
+    def __get_site(self, url: str, visibility: bool = True, retries: int = 5) -> Any:
+        for attempt in range(retries):
+            time.sleep(random.uniform(3, 7))
+            options = uc.ChromeOptions()
+            options.add_argument("--disable-blink-features=AutomationControlled")
+            options.add_argument("--window-position=-2000,0")
+            options.add_argument("--window-size=1920,1080")
 
-        driver = uc.Chrome(options=options, version_main=144)
-        driver.get(url)
-        sleep(2)
 
-        try:
-            WebDriverWait(driver, 2).until(
-                EC.presence_of_element_located((By.ID, "YqYak7"))
-            )
-            print("*Cloudflair protection detected*")
-            sleep(10000000)
-            
-        except (NoSuchElementException, TimeoutException):
-            print("*No cloudflair protection detected*")
-        return driver
+            driver = uc.Chrome(options=options, version_main=144)
+            driver.get(url)
+            driver.minimize_window()
+            sleep(2)
+            try:
+                WebDriverWait(driver, 2).until(
+                    EC.presence_of_element_located((By.ID, "YqYak7"))
+                )
+                print("Cloudflair protection detected, program will retry in 10 seconds")
+                sleep(10)
+                WebDriverWait(driver, 2).until(
+                    EC.presence_of_element_located((By.ID, "YqYak7"))
+                )
+                driver.quit()
+                sleep(30)
+                WebDriverWait(driver, 2).until(
+                    EC.presence_of_element_located((By.ID, "YqYak7"))
+                )
+                driver.quit()
+                print(f"* Cloudflair bypass attempt failed: {attempt + 1}/{retries}*")
+
+            except (NoSuchElementException, TimeoutException):
+                time.sleep(1)
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+                time.sleep(1)
+                return driver
+        raise CloudflairError
