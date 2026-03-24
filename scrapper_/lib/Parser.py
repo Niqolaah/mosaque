@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException
 
 import re
 from .Errors import ParseError
@@ -22,7 +22,8 @@ class Parser:
     def __get_name_and_year(cls, driver):
         try:
             name_and_year_el = driver.find_element(
-                    By.CSS_SELECTOR, ".h3.text-uppercase.text-break.fw-bold.mb-0")
+                    By.CSS_SELECTOR,
+                    ".h3.text-uppercase.text-break.fw-bold.mb-0")
             return name_and_year_el.text
         except NoSuchElementException:
             raise ParseError
@@ -34,7 +35,7 @@ class Parser:
             return name_and_year_el.split("(")[0]
         except (NoSuchElementException, ParseError):
             raise ParseError
-    
+
     @classmethod
     def get_work_year(cls, driver) -> str:
         try:
@@ -85,10 +86,22 @@ class Parser:
                     By.CSS_SELECTOR,
                     "div.row ul.list-unstyled li.mt-2"
                     )
-            size = re.search(r"\d+\s*x\s*\d+\s*cm", size_el.text)
+            # 🔹 Format 1 : 100 x 200 cm (avec virgules ou points)
+            size = re.search(r"\d+(?:[.,]\d+)?\s*x\s*\d+(?:[.,]\d+)?\s*cm",
+                             size_el.text)
             if size:
                 return size.group()
-            else:
-                return "None"
+
+            # 🔹 Format 2 : Hauteur 72cm, Largeur 54cm
+            size_alt = re.search(
+                r"Hauteur\s*(\d+(?:[.,]\d+)?)\s*cm,\s*Largeur\s*(\d+(?:[.,]\d+)?)\s*cm",
+                size_el.text,
+                re.IGNORECASE
+            )
+            if size_alt:
+                height = size_alt.group(1)
+                width = size_alt.group(2)
+                return f"{height} x {width} cm"
+            raise ParseError
         except NoSuchElementException:
             raise ParseError

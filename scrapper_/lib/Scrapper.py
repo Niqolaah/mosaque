@@ -1,6 +1,4 @@
-from selenium import webdriver
 import undetected_chromedriver as uc
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
@@ -9,7 +7,9 @@ from selenium.webdriver.common.by import By
 from time import sleep
 from .ParsedData import ParsedData
 from .Parser import Parser
-from.Errors import ParseError, CloudflairError
+from .Errors import ParseError, CloudflairError
+from .LogRecorder import LogRecorder
+from .LogRecorder import LogType
 
 from typing import Any
 import time
@@ -17,117 +17,151 @@ import random
 
 
 class Scrapper:
-    def __init__(self):
+    def __init__(self, logrecorder: LogRecorder):
         self.__works = ParsedData()
+        self.__logs = logrecorder
 
-    def scrap(self):
+    def scrap(self, visibility: bool = True):
         url = "https://www.artmajeur.com/agnes-couret"
         try:
-            self.scrap_works_categories(url)
-            self.scrap_works(url)
+            self.scrap_works_categories(url, visibility)
+            self.scrap_works(url, visibility)
             self.__works.print_work_list()
         except CloudflairError as e:
             raise CloudflairError(e)
+        finally:
+            self.__works.write_works()
 
-    def scrap_works(self, url: str) -> None:
+    def scrap_works(self, url: str, visibility: bool) -> None:
         url_list = self.__works.get_links_list()
         for i, url in enumerate(url_list):
             try:
-                driver = self.__get_site(url)
+                driver = self.__get_site(url, visibility=visibility)
             except CloudflairError:
-                raise CloudflairError(f"Cloudflair error at {url}")
+                error_str = f"Cloudflair error at work: {url}"
+                self.__logs.add_log(error_str, LogType.LOGERROR)
+                raise CloudflairError(error_str)
+
+            status = False
 
             try:
                 name = Parser.get_work_name(driver)
             except ParseError:
+                self.__logs.add_log(f"Name not found at {url}",
+                                    LogType.LOGINFO)
                 name = ""
             try:
                 price = Parser.get_work_price(driver)
             except ParseError:
-                price = ""
+                # self.__logs.add_log(f"Price not found at {url}",
+                #                     LogType.LOGINFO)
+                price = "0"
+                status = True
             try:
                 description = Parser.get_work_description(driver)
             except ParseError:
+                self.__logs.add_log(f"Description not found at {url}",
+                                    LogType.LOGINFO)
                 description = ""
             try:
                 size = Parser.get_work_size(driver)
             except ParseError:
+                self.__logs.add_log(f"Size not found at {url}",
+                                    LogType.LOGINFO)
                 size = ""
             try:
                 year = Parser.get_work_year(driver)
             except ParseError:
+                self.__logs.add_log(f"Year not found at {url}",
+                                    LogType.LOGINFO)
                 year = ""
 
-            
             self.__works.update_work_by_url(
                 url=url, name=name, year=year, size=size, price=price,
-                description=description
+                description=description, status=status
             )
             driver.quit()
-            print(f"Scrapped: {i+1}/{len(url_list)}")
+            self.__logs.add_log((f"Work successfully scrapped "
+                                f"({i+1}/{len(url_list)})"),
+                                LogType.LOGSUCCESS)
             sleep(1)
 
-    def scrap_works_categories(self, url: str) -> None:
+    def scrap_works_categories(self, url: str, visibility: bool) -> None:
         try:
-            driver = self.__get_site(url, visibility=True)
+            driver = self.__get_site(url, visibility=visibility)
         except CloudflairError:
-            raise CloudflairError("Cloudflair Error at categories collecting")
+            error_str = "Cloudflair Error at categories collecting"
+            self.__logs.add_log(error_str, LogType.LOGERROR)
+            raise CloudflairError(error_str)
 
         categories_container = driver.find_element(By.CSS_SELECTOR,
                                                    "#carousel_container")
-        categories_elm = categories_container.find_elements(By.CSS_SELECTOR, ".py-4")
-        print(f"{len(categories_elm)} categories found")
+        categories_elm = categories_container.find_elements(By.CSS_SELECTOR,
+                                                            ".py-4")
+        self.__logs.add_log(("Successfully found"
+                            f" {len(categories_elm)} categories"),
+                            LogType.LOGSUCCESS)
 
         for categorie in categories_elm:
-            cate_name = Parser.get_cate_name(categorie)
+            try:
+                cate_name = Parser.get_cate_name(categorie)
+            except ParseError:
+                self.__logs.add_log("Categorie name not found",
+                                    LogType.LOGINFO)
+                cate_name = "NameError"
             self.__works.add_categorie(cate_name, "")
             works_container_el = categorie.find_element(
                 By.CSS_SELECTOR, ".swiper-wrapper.d-flex")
             works_el = works_container_el.find_elements(By.XPATH, "./*")
             for work_el in works_el:
-                # work_name = work_el.find_element(By.CSS_SELECTOR,
-                #                                  ".text-truncate.me-3")
                 work_link = work_el.find_element(By.TAG_NAME, "a")
-                self.__works.add_work(cate_name,
-                                      work_link.get_attribute("href"))
+                self.__works.add_work(categorie=cate_name,
+                                      link=work_link.get_attribute("href"))
 
-        # self.__works.print_work_list()
         driver.quit()
         sleep(2)
 
-    def __get_site(self, url: str, visibility: bool = True, retries: int = 5) -> Any:
+    def __get_site(self, url: str, visibility: bool, retries: int = 5) -> Any:
         for attempt in range(retries):
             time.sleep(random.uniform(3, 7))
             options = uc.ChromeOptions()
-            options.add_argument("--disable-blink-features=AutomationControlled")
-            options.add_argument("--window-position=-2000,0")
-            options.add_argument("--window-size=1920,1080")
-
+            options.add_argument(
+                "--disable-blink-features=AutomationControlled")
+            if not visibility:
+                options.add_argument("--window-position=-2000,0")
+                options.add_argument("--window-size=1920,1080")
 
             driver = uc.Chrome(options=options, version_main=144)
+            if not visibility:
+                driver.minimize_window()
             driver.get(url)
-            driver.minimize_window()
             sleep(2)
             try:
                 WebDriverWait(driver, 2).until(
                     EC.presence_of_element_located((By.ID, "YqYak7"))
                 )
-                print("Cloudflair protection detected, program will retry in 10 seconds")
+                print("Cloudflair protection detected, "
+                      "program will retry in 10 seconds")
                 sleep(10)
                 WebDriverWait(driver, 2).until(
                     EC.presence_of_element_located((By.ID, "YqYak7"))
                 )
-                driver.quit()
+                print("Cloudflair protection detected, "
+                      "program will retry in 30 seconds")
                 sleep(30)
                 WebDriverWait(driver, 2).until(
                     EC.presence_of_element_located((By.ID, "YqYak7"))
                 )
                 driver.quit()
-                print(f"* Cloudflair bypass attempt failed: {attempt + 1}/{retries}*")
+                error_str = (f"* Cloudflair bypass attempt failed: "
+                             f"{attempt + 1}/{retries}*")
+                self.__logs.add_log(error_str, LogType.LOGINFO)
+                print(error_str)
 
             except (NoSuchElementException, TimeoutException):
                 time.sleep(1)
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+                driver.execute_script(
+                    "window.scrollTo(0, document.body.scrollHeight)")
                 time.sleep(1)
                 return driver
         raise CloudflairError

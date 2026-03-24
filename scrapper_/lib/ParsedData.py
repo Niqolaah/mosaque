@@ -1,10 +1,12 @@
 from typing import Union
+from datetime import datetime
+import os
 
 
 class ParsedData:
 
     def __init__(self):
-        self.__works: dict[str, dict[str, Union[str, list]]] = {}
+        self.__works: dict[str, dict[str, Union[str, list[Work]]]] = {}
 
     # dict  {
     #       "categorie": {
@@ -50,12 +52,34 @@ class ParsedData:
                         size=size, status=status, price=price,
                         description=description
                     )
-                    break
+                    return
+
+    def write_works(self):
+        file_name = f"[{datetime.now().strftime('%d-%m-%Y_%H-%M-%S')}]"
+        file_name += "_works_save.txt"
+        os.makedirs("works_saves", exist_ok=True)
+        with open(f"./works_saves/{file_name}", "a") as f:
+            f.write("[CATEGORIES]\n")
+            for cate, content in self.__works.items():
+                f.write(f"{cate}\n")
+            f.write("\n[WORKS]\n")
+            for cate, content in self.__works.items():
+                for work in content["list"]:
+                    f.write("-----\n")
+                    f.write(f"name:{work.get_name()}\n")
+                    f.write(f"categorie:{cate}\n")
+                    f.write(f"link:{work.get_link()}\n")
+                    f.write(f"year:{work.get_year()}\n")
+                    f.write(f"size:{work.get_size()}\n")
+                    f.write(f"status:{work.get_status()}\n")
+                    f.write(f"price:{work.get_price()}\n")
+                    f.write(f"description:{work.get_description()}\n")
+                    f.write("\n")
 
 
 class Work:
     def __init__(self, link, name="None", year=0, size="None",
-                 status="None", price=0, description=""):
+                 status=False, price=0, description=""):
         self.__name = name
         self.__year = year
         self.__size = size
@@ -74,5 +98,23 @@ class Work:
         print(f"description: {self.__description}")
 
     # Getters
+    def get_name(self) -> str:
+        return self.__name
+
     def get_link(self) -> str:
         return self.__link
+
+    def get_year(self) -> int:
+        return self.__year
+
+    def get_size(self) -> str:
+        return self.__size
+
+    def get_status(self) -> bool:
+        return self.__status
+
+    def get_price(self) -> int:
+        return self.__price
+
+    def get_description(self) -> str:
+        return self.__description
