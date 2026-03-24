@@ -105,3 +105,14 @@ class Parser:
             raise ParseError
         except NoSuchElementException:
             raise ParseError
+
+    @classmethod
+    def get_work_img_url(cls, driver) -> str:
+        try:
+            img_container = driver.find_element(By.ID, "carousel_image")
+            img_el = img_container.find_element(By.TAG_NAME, "img")
+            img_url = img_el.get_attribute("src")
+            print(img_url)
+            return img_url
+        except NoSuchElementException:
+            raise ParseError

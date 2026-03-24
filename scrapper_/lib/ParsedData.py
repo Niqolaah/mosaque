@@ -43,14 +43,15 @@ class ParsedData:
 
     def update_work_by_url(self, url: str, name: str = "None", year: int = 0,
                            price: int = 0, size: str = "None",
-                           description: str = "None", status: bool = False):
+                           description: str = "None", status: bool = False,
+                           img_url: str = "None"):
         for categorie, content in self.__works.items():
             for i, work in enumerate(content["list"]):
                 if work.get_link() == url:
                     content["list"][i] = Work(
                         link=url, name=name, year=year,
                         size=size, status=status, price=price,
-                        description=description
+                        description=description, img_url=img_url
                     )
                     return
 
@@ -79,7 +80,7 @@ class ParsedData:
 
 class Work:
     def __init__(self, link, name="None", year=0, size="None",
-                 status=False, price=0, description=""):
+                 status=False, price=0, description="", img_url=""):
         self.__name = name
         self.__year = year
         self.__size = size
@@ -87,6 +88,7 @@ class Work:
         self.__link = link
         self.__price = price
         self.__description = description
+        self.__img_url = img_url
 
     def print_work(self) -> None:
         print(f"name: {self.__name}")
@@ -96,6 +98,7 @@ class Work:
         print(f"status: {self.__status}")
         print(f"price: {self.__price}")
         print(f"description: {self.__description}")
+        print(f"image url: {self.__img_url}")
 
     # Getters
     def get_name(self) -> str:
@@ -118,3 +121,6 @@ class Work:
 
     def get_description(self) -> str:
         return self.__description
+
+    def get_img_url(self) -> str:
+        return self.__img_url

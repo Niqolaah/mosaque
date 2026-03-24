@@ -13,6 +13,7 @@ from .LogRecorder import LogType
 
 from typing import Any
 import time
+import os
 import random
 
 
@@ -26,6 +27,7 @@ class Scrapper:
         try:
             self.scrap_works_categories(url, visibility)
             self.scrap_works(url, visibility)
+            self.download_all_imgs(visibility)
             self.__works.print_work_list()
         except CloudflairError as e:
             raise CloudflairError(e)
@@ -75,15 +77,21 @@ class Scrapper:
                 self.__logs.add_log(f"Year not found at {url}",
                                     LogType.LOGINFO)
                 year = ""
+            try:
+                img_url = Parser.get_work_img_url(driver)
+            except ParseError:
+                self.__logs.add_log(f"Image not found at {url}",
+                                    LogType.LOGINFO)
+                img_url = None
 
             self.__works.update_work_by_url(
                 url=url, name=name, year=year, size=size, price=price,
-                description=description, status=status
+                description=description, status=status, img_url=img_url
             )
-            driver.quit()
             self.__logs.add_log((f"Work successfully scrapped "
                                 f"({i+1}/{len(url_list)})"),
                                 LogType.LOGSUCCESS)
+            driver.quit()
             sleep(1)
 
     def scrap_works_categories(self, url: str, visibility: bool) -> None:
@@ -120,6 +128,31 @@ class Scrapper:
 
         driver.quit()
         sleep(2)
+
+    def download_all_imgs(self, visibility: bool):
+        for cate, content in self.__works:
+            for work in content["list"]:
+                try:
+                    self.download_work_img(work.get_img_url(), visibility)
+                except CloudflairError:
+                    pass
+
+    def download_work_img(self, url: str, visibility: bool) -> None:
+        os.makedirs("imgs", exist_ok=True)
+        img_name = url.split("/")[-1] + ".png"
+        filename = os.path.join("imgs", img_name)
+
+        try:
+            driver = self.__get_site(url, visibility=True)
+            img = driver.find_element(By.TAG_NAME, "img")
+        except CloudflairError:
+            error_str = f"Impossible to download {url}"
+            self.__logs.add_log(error_str)
+            raise CloudflairError(error_str)
+        with open(filename, "wb") as f:
+            f.write(img.screenshot_as_png)
+
+        self.__logs.add_log("Image successfully downloaded")
 
     def __get_site(self, url: str, visibility: bool, retries: int = 5) -> Any:
         for attempt in range(retries):
