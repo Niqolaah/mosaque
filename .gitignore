@@ -2,3 +2,4 @@
 ./scrapper/.venv
 ./scrapper/imgs
 ./scrapper/lib/__pycache__
+.vscode
