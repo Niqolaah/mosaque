@@ -1,2 +1,1 @@
-[25/03/2026-07:15:42] Unknow Error: LogRecorder.add_log() missing 1 required positional argument: 'logtype'
-[25/03/2026-07:43:20] Unknow Error: [Errno 28] No space left on device: './works_saves/[25-03-2026_07-43-20]_works_save.txt'
+[25/03/2026-12:07:54] Timeout: Impossible to download https://medias.artmajeur.com/standard/17839189_grenouille-de-pres-final-6-mars-24.jpg?v=1738262800

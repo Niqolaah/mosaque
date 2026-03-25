@@ -4,3 +4,7 @@ class ParseError(Exception):
 
 class CloudflairError(Exception):
     pass
+
+
+class DataError(Exception):
+    pass
