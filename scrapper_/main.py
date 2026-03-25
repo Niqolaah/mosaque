@@ -1,6 +1,6 @@
 from lib.Scrapper import Scrapper
 from lib.Errors import CloudflairError
-from lib.LogRecorder import LogRecorder
+from lib.LogRecorder import LogRecorder, LogType
 
 if __name__ == "__main__":
     logs = LogRecorder(verbose=True)
@@ -11,6 +11,6 @@ if __name__ == "__main__":
     except CloudflairError as e:
         print(f"Error Detected: {e}")
     except Exception as e:
-        print(e)
+        logs.add_log(f"Unknow Error: {e}", LogType.LOGERROR)
     finally:
         logs.write_logs()

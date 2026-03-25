@@ -1,0 +1,4 @@
+./scrapper/work_save
+./scrapper/.venv
+./scrapper/imgs
+./scrapper/lib/__pycache__

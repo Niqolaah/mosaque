@@ -33,3 +33,7 @@
 [24/03/2026-10:18:19] Size not found at https://www.artmajeur.com/agnes-couret/fr/oeuvres-d-art/17844445/ophelie
 [24/03/2026-10:18:35] Size not found at https://www.artmajeur.com/agnes-couret/fr/oeuvres-d-art/17844367/felin
 [24/03/2026-10:18:51] Size not found at https://www.artmajeur.com/agnes-couret/fr/oeuvres-d-art/17844238/petite-chouette
+[25/03/2026-07:04:39] * Cloudflair bypass attempt failed: 1/5*
+[25/03/2026-07:24:58] * Cloudflair bypass attempt failed: 1/5*
+[25/03/2026-07:34:08] * Cloudflair bypass attempt failed: 1/5*
+[25/03/2026-07:36:32] * Cloudflair bypass attempt failed: 1/5*

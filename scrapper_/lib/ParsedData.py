@@ -34,24 +34,18 @@ class ParsedData:
                 print("-----")
             print("\n\n")
 
-    def get_links_list(self) -> list[str]:
-        links_list = []
-        for categorie, content in self.__works.items():
-            for work in content["list"]:
-                links_list.append(work.get_link())
-        return links_list
-
     def update_work_by_url(self, url: str, name: str = "None", year: int = 0,
                            price: int = 0, size: str = "None",
                            description: str = "None", status: bool = False,
-                           img_url: str = "None"):
+                           img_url: str = "None", img_file_name: str = "None"):
         for categorie, content in self.__works.items():
             for i, work in enumerate(content["list"]):
                 if work.get_link() == url:
                     content["list"][i] = Work(
                         link=url, name=name, year=year,
                         size=size, status=status, price=price,
-                        description=description, img_url=img_url
+                        description=description, img_url=img_url,
+                        img_file_name=img_file_name
                     )
                     return
 
@@ -74,13 +68,35 @@ class ParsedData:
                     f.write(f"size:{work.get_size()}\n")
                     f.write(f"status:{work.get_status()}\n")
                     f.write(f"price:{work.get_price()}\n")
+                    f.write(f"img_url:{work.get_img_url}")
+                    f.write(f"img_file_name:{work.get_img_file_name()}")
                     f.write(f"description:{work.get_description()}\n")
                     f.write("\n")
 
+    # Getters
+    def get_links_list(self) -> list[str]:
+        links_list = []
+        for categorie, content in self.__works.items():
+            for work in content["list"]:
+                links_list.append(work.get_link())
+        return links_list
+
+    def get_imgs_list(self) -> list[dict[str, str]]:
+        imgs = []
+
+        for categorie, content in self.__works.items():
+            for work in content["list"]:
+                imgs.append({
+                    "link": work.get_img_url(),
+                    "file_name": work.get_img_file_name()
+                })
+        return imgs
+
 
 class Work:
-    def __init__(self, link, name="None", year=0, size="None",
-                 status=False, price=0, description="", img_url=""):
+    def __init__(self, link: str, name: str, year: int, size: str,
+                 status: bool, price: int, description: str, img_url: str,
+                 img_file_name: str):
         self.__name = name
         self.__year = year
         self.__size = size
@@ -89,6 +105,7 @@ class Work:
         self.__price = price
         self.__description = description
         self.__img_url = img_url
+        self.__img_file_name = img_file_name
 
     def print_work(self) -> None:
         print(f"name: {self.__name}")
@@ -97,8 +114,9 @@ class Work:
         print(f"size: {self.__size}")
         print(f"status: {self.__status}")
         print(f"price: {self.__price}")
-        print(f"description: {self.__description}")
         print(f"image url: {self.__img_url}")
+        print(f"image file: {self.__img_file_name}")
+        print(f"description: {self.__description}")
 
     # Getters
     def get_name(self) -> str:
@@ -124,3 +142,6 @@ class Work:
 
     def get_img_url(self) -> str:
         return self.__img_url
+
+    def get_img_file_name(self) -> str:
+        return self.__img_file_name
