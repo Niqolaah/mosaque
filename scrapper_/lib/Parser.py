@@ -102,6 +102,7 @@ class Parser:
                 height = size_alt.group(1)
                 width = size_alt.group(2)
                 return f"{height} x {width} cm"
+            print(f"size: ({size_el.text})")
             raise ParseError
         except NoSuchElementException:
             raise ParseError

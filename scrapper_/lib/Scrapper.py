@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 from time import sleep
 from .ParsedData import ParsedData
@@ -46,7 +48,7 @@ class Scrapper:
         url_list = self.__works.get_links_list()
         for i, url in enumerate(url_list):
             try:
-                driver = self.__get_site(url, visibility=visibility)
+                driver = self.__get_site(url, visibility=visibility, work_page=True)
             except CloudflairError:
                 error_str = f"Cloudflair error at work: {url}"
                 self.__logs.add_log(error_str, LogType.LOGERROR)
@@ -59,6 +61,7 @@ class Scrapper:
             except ParseError:
                 self.__logs.add_log(f"Name not found at {url}",
                                     LogType.LOGINFO)
+                print("Name is null")
                 name = ""
             try:
                 price = Parser.get_work_price(driver)
@@ -78,6 +81,7 @@ class Scrapper:
             except ParseError:
                 self.__logs.add_log(f"Size not found at {url}",
                                     LogType.LOGINFO)
+                print("Size is null")
                 size = ""
             try:
                 year = Parser.get_work_year(driver)
@@ -93,13 +97,13 @@ class Scrapper:
                 img_url = None
 
             img_file_name = url.split("/")[-1] + ".png"
-
+            
             self.__works.update_work_by_url(
                 url=url, name=name, year=year, size=size, price=price,
                 description=description, status=status, img_url=img_url,
                 img_file_name=img_file_name
             )
-            self.__logs.add_log((f"Work successfully scrapped "
+            self.__logs.add_log((f"Work ({name}) successfully scrapped "
                                 f"({i+1}/{len(url_list)})"),
                                 LogType.LOGSUCCESS)
             driver.quit()
@@ -178,7 +182,7 @@ class Scrapper:
         finally:
             driver.quit()
 
-    def __get_site(self, url: str, visibility: bool, retries: int = 5) -> Any:
+    def __get_site(self, url: str, visibility: bool, retries: int = 5, work_page:bool = False) -> Any:
         for attempt in range(retries):
             time.sleep(random.uniform(3, 7))
             options = uc.ChromeOptions()
@@ -221,5 +225,15 @@ class Scrapper:
                 driver.execute_script(
                     "window.scrollTo(0, document.body.scrollHeight)")
                 time.sleep(1)
+                if(work_page):
+                    time.sleep(1)
+                    try:
+                        body = driver.find_element(By.ID,
+                                            "my-page")
+                        ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+                        driver.execute_script("document.body.click();")
+                        sleep(1)
+                    except Exception as e:
+                        pass
                 return driver
         raise CloudflairError
