@@ -1,21 +1,9 @@
-<!-- <?php
-require "db.php";
+<?php
+ error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require __DIR__ . '/sources/db/db.php'
+?>
 
-$result = "SELECT * FORM database";
-
-echo "<table border='1'>";
-echo "<tr><th>Titre</th><th>Status</th><th>Dimensions</th><th>Date</th><th>Lien</th><th>Prix</th></tr>";
-
-foreach ($result as $row){
-	echo "<tr>";
-	echo "<td>".$row['titre']."</td>";
-	echo "<td>".$row['date']."</td>";
-	echo "<td>".$row['taille']."</td>";
-	echo "<td>".$row['lien']."</td>";
-	echo "<td>".$row['vendu']."</td>";
-	echo "<td>".$row['prix']."</td>";
-}
-?> -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,18 +20,9 @@ foreach ($result as $row){
 </head>
 
 <body>
-
-	<header>
-		<div class="logo">Agnes Couret</div>
-		<div class="menu-toggle" id="menu-toggle">☰</div>
-		<nav id="nav">
-			<a href="index.html">Accueil</a>
-			<a href="colection.html">Galerie</a>
-			<a href="#about">À propos</a>
-			<a href="#exhibitions">Expositions</a>
-			<a href="#contact">Contact</a>
-		</nav>
-	</header>
+	<?php 
+		include("header.php")
+	?>
 
 	<section id="home" class="hero">
 		<div class="title_container">
@@ -52,32 +31,21 @@ foreach ($result as $row){
 		</div>
 	</section>
 
-	<section id="gallery">
+	<section class="gallery-container">
 		<h2 class="section-title">Galerie</h2>
-
 		<div class="gallery">
-
-			<a href="./colection.html">	
-				<div class="artwork">
-					<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
-					<div class="overlay">Mamipheres</div>
-				</div>
-			</a>
-
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4">
-				<div class="overlay">Œuvre 2</div>
-			</div>
-
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1504198266285-165a3c84f27d">
-				<div class="overlay">Œuvre 3</div>
-			</div>
-
-			<div class="artwork">
-				<img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b">
-				<div class="overlay">Œuvre 4</div>
-			</div>
+			<?php
+				$sql = "SELECT * FROM category";
+				$produits = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($produits as $produit): ?>
+				<h2>Collection <?= $produit["name"]?></h2>
+				<a href="./collection.php?category=<?= $produit['id_category'] ?>">	
+					<div class="artwork">
+						<img src="sources/imgs/<?= $produit["img_link"] ?>">
+						<div class="overlay"><?= $produit['name'] ?></div>
+					</div>
+				</a>
+			<?php endforeach; ?>
 		</div>
 	</section>
 
@@ -125,69 +93,75 @@ foreach ($result as $row){
 	</section>
 
 	<section id="exhibitions" class="exhibitions">
-		<div class="section">
-
-			<h2 class="section-title">Prix et recompenses</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
+		<div class="pair">
+			<div class="section">
+				<h2 class="section-title">Prix et recompenses</h2>
+				
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				
 			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
-			</div>
-		</div>
-		<div class="section">
-
-			<h2 class="section-title">Expositions solo</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
+			<div class="section">
+				<h2 class="section-title">Expositions solo</h2>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
 			</div>
 		</div>
 
-	<div class="section">
+		<div class="pair">
+			<div class="section">
+				<h2 class="section-title">Expositions collectives</h2>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
+			</div>
+			
+			<div class="section">
 
-			<h2 class="section-title">Expositions collectives</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
+				<h2 class="section-title">Publications et presse</h2>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
+				<div class="exhibition-item">
+					<strong>2025</strong> — Galerie Moderne, Paris
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2024</strong> — Salon des Artistes Contemporains
+				</div>
+				
+				<div class="exhibition-item">
+					<strong>2023</strong> — Exposition Collective, Marseille
+				</div>
 			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
-			</div>
-		</div>
-	
-	<div class="section">
-
-			<h2 class="section-title">Publications et presse</h2>
-			<div class="exhibition-item">
-				<strong>2025</strong> — Galerie Moderne, Paris
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2024</strong> — Salon des Artistes Contemporains
-			</div>
-			
-			<div class="exhibition-item">
-				<strong>2023</strong> — Exposition Collective, Marseille
-			</div>
-		</div>
-
+		</div>	
 	</section>
 
 	<section id="contact" class="contact">
@@ -230,21 +204,6 @@ foreach ($result as $row){
 		toggle.addEventListener("click",()=>{
 		nav.classList.toggle("active")
 		})
-
-		const artworks = document.querySelectorAll(".artwork img")
-		const lightbox = document.getElementById("lightbox")
-		const lightboxImg = document.getElementById("lightbox-img")
-
-		artworks.forEach(img=>{
-			img.addEventListener("click",()=>{
-				lightbox.style.display="flex"
-				lightboxImg.src=img.src
-			})
-		})
-
-		lightbox.addEventListener("click",()=>{
-			lightbox.style.display="none"
-		})
 	</script>
-	</body>
+</body>
 </html>

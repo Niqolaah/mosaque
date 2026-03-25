@@ -44,6 +44,11 @@ section{
 	gap:25px;
 }
 
+.gallery h2
+{
+	display: none;
+}
+
 .artwork{
 	position:relative;
 	cursor:pointer;
@@ -106,11 +111,13 @@ section{
 	width: 100%;
 	justify-content: space-around;
 	flex-wrap: wrap;
-	
+}
+.exhibitions .section{
+	padding: 30px 0;
 }
 
 .exhibition-item{
-	margin-bottom:20px;
+	margin-bottom:10px;
 }
 
 /* CONTACT */
@@ -205,11 +212,33 @@ footer .social img{
 		display:flex;
 	}
 
+
+	section{
+		padding: 50px 20px;
+	}
+
+	.gallery{
+		padding: 10px 20px;
+	}
+	.gallery h2
+	{
+		display: block;
+		font-family: "Playfair Display";
+		text-align: center;
+		font-size: 30px;
+	}
+
 	.about{
 		grid-template-columns:1fr;
 	}
 
 	.hero h1{
 		font-size:40px;
+	}
+	.about {
+		padding: 10px;
+	}
+	.about img{
+		width: 80vw;
 	}
 }

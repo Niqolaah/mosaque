@@ -1,13 +1,14 @@
 
 /* BANNER */
 .banner{
-  width: 100vw;
-  padding: 15% 5% 8% 5%;
+  width: 100%;
+  padding: 70px 0;
 }
+
 .banner h1{
   text-align: center;
   font-family:"Playfair Display";
-  padding: 10px;
+  padding: 40px 0;
 }
 
 /* Gallery */
@@ -32,9 +33,42 @@
   transform: scale(1.02);
 }
 
-.gallery figure:hover figcaption{
-  opacity: 100;
+.gallery figcaption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  height: 0;
+  color: white;
+  font-size: 0.9rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  opacity: 0;
+  text-align: center;
 }
+
+.gallery .overlay-content .sold-status
+{
+  padding: 10px;
+  background-color: #d4a373;
+}
+
+.gallery figcaption h3 {
+  font-style: bold;
+  font-family:"Playfair Display";
+  font-size: 20px;
+}
+
+.gallery figure:hover figcaption{
+  opacity: 100%;
+  height: 100%;
+}
+
+
 
 .gallery img {
   width: 100%;
@@ -42,18 +76,7 @@
   display: block;
 }
 
-.gallery figcaption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  color: white;
-  font-size: 0.9rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  opacity: 0;
-  text-align: center;
-}
+
 
 
 /* Responsive */

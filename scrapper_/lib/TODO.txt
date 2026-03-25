@@ -1,0 +1,7 @@
+[X] Size vaut None si elle contient une vigule
+[X] Logger, qui enregistre toutes les actions, le temps et les erreurs
+[] Declancheur pour activer le parseur
+[] Un moyen de communication (mail ou autre)
+[] Si possible une IP publique aleatoire pour eviter le banip
+[X] Enregistrer les donnnes dans json ou txt ou autre
+[X] Enregistre les images
