@@ -6,7 +6,6 @@ from .Errors import DataError
 
 
 class ParsedData:
-
     def __init__(self):
         self.__works: dict[str, dict[str, Union[str, list[Work]]]] = {}
 
@@ -62,19 +61,20 @@ class ParsedData:
                     if ":" in line:
                         key, value = line.split(":", 1)
                         work_datas[key.strip()] = value.strip()
-                print("ADDING:", work_datas["name"])
-                self.add_work(
-                    categorie=work_datas["categorie"],
-                    link=work_datas["link"],
-                    name=work_datas["name"],
-                    year=work_datas["year"],
-                    size=work_datas["size"],
-                    status=work_datas["status"],
-                    price=work_datas["price"],
-                    description=work_datas["description"],
-                    img_url=work_datas["img_url"],
-                    img_file_name=work_datas["img_file_name"]
-                )
+                if work_datas["name"] != None and work_datas["name"] != "None":
+                    print("ADDING:", work_datas["name"])
+                    self.add_work(
+                        categorie=work_datas["categorie"],
+                        link=work_datas["link"],
+                        name=work_datas["name"],
+                        year=work_datas["year"],
+                        size=work_datas["size"],
+                        status=work_datas["status"],
+                        price=work_datas["price"],
+                        description=work_datas["description"],
+                        img_url=work_datas["img_url"],
+                        img_file_name=work_datas["img_file_name"]
+                    )
         else:
             print("No work find")
 
@@ -149,6 +149,23 @@ class ParsedData:
                 })
         return imgs
 
+    def get_works_as_list(self) -> list[dict]:
+        final_list = []
+
+        for categorie, content in self.__works.items():
+            for work in content["list"]:
+                work_dict = work.get_work_as_dict()
+                work_dict["categorie"] = categorie
+                final_list.append(work_dict)
+        return final_list
+    
+    def get_cate_as_list(self) -> list[dict]:
+        final_list = []
+
+        for categorie, content in self.__works.items():
+            final_list.append({"name": categorie, "description": content["link"]})
+        return final_list
+
 
 class Work:
     def __init__(self, link: str, name: str = "None", year: int = 0,
@@ -203,3 +220,16 @@ class Work:
 
     def get_img_file_name(self) -> str:
         return self.__img_file_name
+    
+    def get_work_as_dict(self) -> dict:
+        return {
+            "name": self.__name,
+            "link": self.__link,
+            "year": self.__year,
+            "size": self.__size,
+            "status": self.__status,
+            "price": self.__price,
+            "description": self.__description,
+            "img_url": self.__img_url,
+            "img_file_name": self.__img_file_name
+        }

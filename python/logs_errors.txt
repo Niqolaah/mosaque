@@ -1,0 +1,6 @@
+[26/03/2026-10:31:29] Unknow Error: [Errno 2] No such file or directory: '/works_saves/python/works_saves/[26-03-2026_09-42-40]_works_save.txt'
+[26/03/2026-10:31:46] Unknow Error: [Errno 2] No such file or directory: '/works_saves/python/works_saves/[26-03-2026_09-42-40]_works_save.txt'
+[26/03/2026-10:31:57] Unknow Error: [Errno 2] No such file or directory: 'works_saves/python/works_saves/[26-03-2026_09-42-40]_works_save.txt'
+[26/03/2026-10:32:26] Unknow Error: [Errno 2] No such file or directory: 'lib/works_saves/python/works_saves/[26-03-2026_09-42-40]_works_save.txt'
+[26/03/2026-10:32:35] Unknow Error: [Errno 2] No such file or directory: './lib/works_saves/python/works_saves/[26-03-2026_09-42-40]_works_save.txt'
+[26/03/2026-10:32:43] Unknow Error: [Errno 2] No such file or directory: '/lib/works_saves/python/works_saves/[26-03-2026_09-42-40]_works_save.txt'

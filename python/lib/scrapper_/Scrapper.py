@@ -7,11 +7,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 
 from time import sleep
-from .ParsedData import ParsedData
+from ..ParsedData import ParsedData
 from .Parser import Parser
-from .Errors import ParseError, CloudflairError
-from .LogRecorder import LogRecorder
-from .LogRecorder import LogType
+from ..Errors import ParseError, CloudflairError
+from ..LogRecorder import LogRecorder, LogType
 
 from typing import Any
 import time
@@ -20,8 +19,8 @@ import random
 
 
 class Scrapper:
-    def __init__(self, logrecorder: LogRecorder):
-        self.__works = ParsedData()
+    def __init__(self, logrecorder: LogRecorder, works: ParsedData):
+        self.__works= works
         self.__logs = logrecorder
 
     def scrap(self, visibility: bool = True):
