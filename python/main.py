@@ -22,5 +22,5 @@ if __name__ == "__main__":
         logs.write_logs()
 
     sender = DataSender(data, logs)
-    # print(sender.get_categories_request("categories"))
+    sender.post_scrapped_categories()
     sender.post_scrapped_works()

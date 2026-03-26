@@ -5,7 +5,9 @@ build:
 
 clean:
 	rm -rf .venv
+	rm -rf __pycache__
 	rm -rf lib/__pycache__
+	rm -rf lib/*/__pycache__
 
 run:
 	./.venv/bin/python main.py
