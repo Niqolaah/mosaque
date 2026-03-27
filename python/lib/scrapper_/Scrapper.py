@@ -28,6 +28,7 @@ class Scrapper:
         try:
             now = time.time()
             self.scrap_works_categories(url, visibility)
+            self.scrap_works_links(visibility)
             self.scrap_works(url, visibility)
             self.__logs.add_log(f"Scrapping finised in {time.time() - now}s",
                                 LogType.LOGSUCCESS)
@@ -108,6 +109,37 @@ class Scrapper:
             driver.quit()
             sleep(1)
 
+    def scrap_works_links(self, visibility: bool) -> None:
+        for cate_dict in self.__works.get_cate_as_list():
+            try:
+                driver = self.__get_site(cate_dict["link"], visibility=visibility)
+            except CloudflairError:
+                error_str = "Cloudflair Error at work link collecting"
+                self.__logs.add_log(error_str, LogType.LOGERROR)
+                raise CloudflairError(error_str)
+            
+            try:
+                works = Parser.get_works_el(driver)
+            except ParseError:
+                error_str = "Works not found"
+                self.__logs.add_log(error_str, LogType.LOGERROR)
+                raise ParseError(error_str)
+            
+            for work in works:
+                try:
+                    name = Parser.get_work_name_by_cate(work)
+                    link = Parser.get_work_link_by_cate(work)
+
+                    print(f"name: {name}, link: {link}")
+                except ParseError:
+                    error_str = "Works not found"
+                    self.__logs.add_log(error_str, LogType.LOGERROR)
+                    raise ParseError(error_str)
+                self.__works.add_work(categorie=cate_dict["name"],
+                                      link=link,
+                                      name=name)
+            driver.quit()
+
     def scrap_works_categories(self, url: str, visibility: bool) -> None:
         try:
             driver = self.__get_site(url, visibility=visibility)
@@ -127,18 +159,20 @@ class Scrapper:
         for categorie in categories_elm:
             try:
                 cate_name = Parser.get_cate_name(categorie)
+                cate_link = Parser.get_cate_link(categorie)
             except ParseError:
                 self.__logs.add_log("Categorie name not found",
                                     LogType.LOGINFO)
                 cate_name = "NameError"
-            self.__works.add_categorie(cate_name, "")
-            works_container_el = categorie.find_element(
-                By.CSS_SELECTOR, ".swiper-wrapper.d-flex")
-            works_el = works_container_el.find_elements(By.XPATH, "./*")
-            for work_el in works_el:
-                work_link = work_el.find_element(By.TAG_NAME, "a")
-                self.__works.add_work(categorie=cate_name,
-                                      link=work_link.get_attribute("href"))
+
+            self.__works.add_categorie(cate_name, cate_link)
+            # works_container_el = categorie.find_element(
+            #     By.CSS_SELECTOR, ".swiper-wrapper.d-flex")
+            # works_el = works_container_el.find_elements(By.XPATH, "./*")
+            # for work_el in works_el:
+            #     work_link = work_el.find_element(By.TAG_NAME, "a")
+            #     self.__works.add_work(categorie=cate_name,
+            #                           link=work_link.get_attribute("href"))
 
         driver.quit()
         sleep(2)

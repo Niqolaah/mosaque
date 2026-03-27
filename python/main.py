@@ -13,7 +13,7 @@ if __name__ == "__main__":
     scrapper = Scrapper(logs, data)
     try:
         # scrapper.scrap(visibility=False)
-        data.init_last_registry("works_saves/[26-03-2026_09-42-40]_works_save.txt")
+        data.init_last_registry("works_saves/[27-03-2026_08-26-38]_works_save.txt")
     except CloudflairError as e:
         print(f"Cloudflair Error Detected: {e}")
     except Exception as e:
@@ -21,6 +21,9 @@ if __name__ == "__main__":
     finally:
         logs.write_logs()
 
-    sender = DataSender(data, logs)
-    sender.post_scrapped_categories()
-    sender.post_scrapped_works()
+    try: 
+        sender = DataSender(data, logs)
+        sender.post_scrapped_categories()
+        sender.post_scrapped_works()
+    except Exception as e:
+        print(e)

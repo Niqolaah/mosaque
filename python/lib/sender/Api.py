@@ -2,18 +2,35 @@ import urllib3
 import requests
 import paramiko
 import os
+from dotenv import load_dotenv
 
 from ..LogRecorder import LogRecorder, LogType
+from ..Errors import APIError
 
 class Api:
     def __init__(self, logs: LogRecorder):
         self.__logs = logs
+        try:
+            self.load_env_var()
+        except APIError as e:
+            raise APIError(e)
 
-        self.__hostname = "whisper.o2switch.net"
-        self.__username = "coag8475"
-        self.__key_path = os.path.expanduser("~/.ssh/o2switch_key")
-        self.__password = "tkr3-3Rxk-NdT{"
-        self.__token = "iuo89sefjse0fusjflkjij(*lkjfsd89j2E39opkOK090)(*#27"
+    def load_env_var(self):
+        load_dotenv()
+        self.__hostname = os.getenv('HOSTNAME_DB')
+        self.__username = os.getenv('USERNAME_DB')
+        self.__key_path = os.getenv('KEY_PATH_SSH')
+        # self.__key_path = os.path.expanduser("~/.ssh/o2switch_key")
+        self.__password = os.getenv('PASSWORD_DB')
+        self.__token = os.getenv('TOKEN_API')
+        if (not self.__hostname or \
+            not self.__username or \
+            not self.__key_path or \
+            not self.__password or \
+            not self.__token):
+            raise APIError("Environment Variable not fount")
+
+
 
     def get_table_request(self, table: str) -> list[dict]:
         url = "https://agnescouret.fr/api/get.php"
@@ -62,6 +79,19 @@ class Api:
         response = requests.post(url, data=data, verify=False)
         if response.status_code == 200:
             return True
+        return False
+    
+    def del_work_by_link(self, link: str) -> None:
+        url = "https://agnescouret.fr/api/del_work.php"
+        data ={
+            "token": self.__token,
+            "art_majeur_link": link
+        }
+        urllib3.disable_warnings()
+        response = requests.post(url, data=data, verify=False)
+        if response.status_code == 200 and response.text  == "OK":
+            return True
+        print(response.text)
         return False
     
     def send_image(self, local_file: str):

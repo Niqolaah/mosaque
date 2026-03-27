@@ -1,4 +1,0 @@
-[26/03/2026-09:26:22] Size not found at https://www.artmajeur.com/agnes-couret/fr/oeuvres-d-art/19860580/ebouriffe
-[26/03/2026-09:42:03] Cannot download None at None: cannot access local variable 'driver' where it is not associated with a value
-[26/03/2026-09:42:08] Cannot download None at None: cannot access local variable 'driver' where it is not associated with a value
-[26/03/2026-09:42:27] Cannot download None at None: cannot access local variable 'driver' where it is not associated with a value

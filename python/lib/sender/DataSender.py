@@ -3,12 +3,16 @@ import time
 from ..ParsedData import ParsedData
 from ..LogRecorder import LogRecorder, LogType
 from .Api import Api
+from ..Errors import APIError
 
 class DataSender:
     def __init__(self, works: ParsedData, logs: LogRecorder):
         self.__works = works
         self.__logs = logs
-        self.api = Api(logs)
+        try:
+            self.api = Api(logs)
+        except APIError as e:
+            raise APIError(e)
 
 
     def post_scrapped_works(self):
@@ -77,10 +81,18 @@ class DataSender:
                     work_dict["description"] == existing_work["description"]):
                     return True
                 else:
-                    # Supprimer le tableau correspondant
-                    self.__logs.add_log(f"Work {work_dict["name"]} has changed",
-                                        LogType.LOGINFO)
-                    return True
+                    try:
+                        if self.api.del_work_by_link(work_dict["link"]):
+                            self.__logs.add_log(f"Work {work_dict["name"]} has changed",
+                                                LogType.LOGSUCCESS)
+                        else:
+                            print("error on delete")
+                            return True
+                        return False
+                    except Exception as e:
+                        self.__logs.add_log(f"Work {work_dict["name"]} could not be deleted : {e}",
+                                            LogType.LOGINFO)
+                        return True
         return False
 
 

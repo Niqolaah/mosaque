@@ -8,3 +8,7 @@ class CloudflairError(Exception):
 
 class DataError(Exception):
     pass
+
+
+class APIError(Exception):
+    pass

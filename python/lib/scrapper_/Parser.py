@@ -17,7 +17,41 @@ class Parser:
         except NoSuchElementException:
             raise ParseError
 
+    @classmethod
+    def get_cate_link(cls, driver):
+        try:
+            link_el =driver.find_element(By.TAG_NAME, "a")
+            link = link_el.get_attribute("href")
+            return link
+        except NoSuchElementException:
+            raise ParseError
+
     # --- WORK ---
+    @classmethod
+    def get_works_el(cls, driver):
+        try:
+            work_el = driver.find_elements(By.CSS_SELECTOR,
+                                          "article.artwork-item")
+            return work_el
+        except NoSuchElementException:
+            raise ParseError
+
+    def get_work_name_by_cate(driver):
+        try:
+            work_name = driver.find_element(By.CSS_SELECTOR,
+                                          "div.h2.font-size-16.text-nowrap.d-flex.mb-0")
+            return work_name.text
+        except NoSuchElementException:
+            raise ParseError
+
+    def get_work_link_by_cate(driver):
+        try:
+            link_el = driver.find_element(By.TAG_NAME,
+                                          "a")
+            return link_el.get_attribute("href")
+        except NoSuchElementException:
+            raise ParseError
+
     @classmethod
     def __get_name_and_year(cls, driver):
         try:

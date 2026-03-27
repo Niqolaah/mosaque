@@ -163,7 +163,9 @@ class ParsedData:
         final_list = []
 
         for categorie, content in self.__works.items():
-            final_list.append({"name": categorie, "description": content["link"]})
+            final_list.append({"name": categorie,
+                               "link": content["link"],
+                               "description": content["link"]})
         return final_list
 
 
