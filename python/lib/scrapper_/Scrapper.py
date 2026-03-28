@@ -164,8 +164,8 @@ class Scrapper:
                 self.__logs.add_log("Categorie name not found",
                                     LogType.LOGINFO)
                 cate_name = "NameError"
-
-            self.__works.add_categorie(cate_name, cate_link)
+            if not "VENDU" in cate_name:
+                self.__works.add_categorie(cate_name, cate_link)
             # works_container_el = categorie.find_element(
             #     By.CSS_SELECTOR, ".swiper-wrapper.d-flex")
             # works_el = works_container_el.find_elements(By.XPATH, "./*")
