@@ -1,0 +1,2 @@
+[30/03/2026-09:57:02] Unknow Error: 'Response' object has no attribute 'code'
+[30/03/2026-10:28:18] Unknow Error: DataSender.is_valid_image() takes 1 positional argument but 2 were given

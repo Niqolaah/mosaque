@@ -21,3 +21,4 @@ websockets==16.0
 wsproto==1.3.2
 paramiko
 python-dotenv
+Pillow

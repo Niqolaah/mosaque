@@ -3,6 +3,7 @@ from lib.Errors import CloudflairError
 from lib.LogRecorder import LogRecorder, LogType
 from lib.sender.DataSender import DataSender
 from lib.ParsedData import ParsedData
+from lib.sender.Api import Api
 
 
 
@@ -10,14 +11,17 @@ from lib.ParsedData import ParsedData
 if __name__ == "__main__":
     data = ParsedData()
     logs = LogRecorder(verbose=True)
-    scrapper = Scrapper(logs, data)
-    try:
-        scrapper.scrap(visibility=False)
-        # data.init_last_registry("works_saves/[27-03-2026_08-26-38]_works_save.txt")
+    api = Api(logs)
+    scrapper = Scrapper(logs, data, api)
 
+    try:
+        # scrapper.scrap(visibility=False)
+        data.init_last_registry("works_saves/[27-03-2026_08-26-38]_works_save.txt")
+        scrapper.download_imgs(visibility=True)
         sender = DataSender(data, logs)
-        sender.post_scrapped_categories()
-        sender.post_scrapped_works()
+        sender.send_downloaded_imgs()
+        # sender.post_scrapped_categories()
+        # sender.post_scrapped_works()
     except CloudflairError as e:
         print(f"Cloudflair Error Detected: {e}")
     except Exception as e:

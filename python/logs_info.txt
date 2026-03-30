@@ -1,0 +1,52 @@
+[30/03/2026-10:00:04] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: cannot access local variable 'driver' where it is not associated with a value
+[30/03/2026-10:00:56] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: cannot access local variable 'driver' where it is not associated with a value
+[30/03/2026-10:02:21] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: cannot access local variable 'driver' where it is not associated with a value
+[30/03/2026-10:07:34] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: cannot access local variable 'driver' where it is not associated with a value
+[30/03/2026-10:12:44] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:48973
+from session not created: This version of ChromeDriver only supports Chrome version 144
+Current browser version is 146.0.7680.164; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x5566ee548a4a <unknown>
+#1 0x5566edf616a2 <unknown>
+#2 0x5566edfa59cf <unknown>
+#3 0x5566edfa4780 <unknown>
+#4 0x5566edf99781 <unknown>
+#5 0x5566edfec06e <unknown>
+#6 0x5566edfeb75c <unknown>
+#7 0x5566edfa88b2 <unknown>
+#8 0x5566edfa96a1 <unknown>
+#9 0x5566ee50e8a9 <unknown>
+#10 0x5566ee5117b1 <unknown>
+#11 0x5566ee4faea9 <unknown>
+#12 0x5566ee51236e <unknown>
+#13 0x5566ee4e1410 <unknown>
+#14 0x5566ee5360c8 <unknown>
+#15 0x5566ee53629b <unknown>
+#16 0x5566ee547db8 <unknown>
+#17 0x7fb69dbc5f14 start_thread
+#18 0x7fb69dc4932c __clone3
+
+[30/03/2026-10:14:26] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:40147
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.164; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x556077c1538a <unknown>
+#1 0x5560776173a5 <unknown>
+#2 0x55607765a82f <unknown>
+#3 0x5560776595e0 <unknown>
+#4 0x55607764e5e1 <unknown>
+#5 0x55607769efbe <unknown>
+#6 0x55607769e6ac <unknown>
+#7 0x55607765d6ef <unknown>
+#8 0x55607765e4b1 <unknown>
+#9 0x556077bd8cfb <unknown>
+#10 0x556077bdbcad <unknown>
+#11 0x556077bc5408 <unknown>
+#12 0x556077bdc840 <unknown>
+#13 0x556077babe50 <unknown>
+#14 0x556077c02188 <unknown>
+#15 0x556077c02358 <unknown>
+#16 0x556077c13dce <unknown>
+#17 0x7f393b612f14 start_thread
+#18 0x7f393b69632c __clone3
+

@@ -94,6 +94,16 @@ class Api:
         print(response.text)
         return False
     
+    def get_imgs_info(self):
+        url = url = "https://agnescouret.fr/api/img_list.php"
+        data={"token": self.__token}
+        urllib3.disable_warnings()
+        response = requests.get(url, params=data, verify=False)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise APIError(f"Impossible to connect api : {response.text}")
+
     def send_image(self, local_file: str):
         remote_file = "public_html/images/image.jpg"
 

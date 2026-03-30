@@ -1,4 +1,6 @@
 import time
+import os
+from PIL import Image
 
 from ..ParsedData import ParsedData
 from ..LogRecorder import LogRecorder, LogType
@@ -13,7 +15,6 @@ class DataSender:
             self.api = Api(logs)
         except APIError as e:
             raise APIError(e)
-
 
     def post_scrapped_works(self):
         dict_works = self.__works.get_works_as_list()
@@ -121,4 +122,35 @@ class DataSender:
             if cate_name == categorie["name"]:
                 return categorie["id_categorie"]
         return -1
+    
+
+    def is_valid_image(filepath: str) -> bool:
+        if not os.path.exists(filepath):
+            return False
+
+        if os.path.getsize(filepath) == 0:
+            return False
+        
+        try:
+            with Image.open(filepath) as img:
+                img.verify()
+            return True
+        except Exception:
+            return False
+        
+    def send_downloaded_imgs(self):
+        for img in [imgs["file_name"] for imgs in self.__works.get_imgs_list()]:
+            img_path = os.path.join("imgs", img)
+            if self.is_valid_image(img_path):
+                try:
+                    self.api.send_image(img_path)
+                except Exception:
+                    self.__logs.add_log(f"Cannot send image: {img_path}",
+                                        LogType.LOGINFO)
+
+            else:
+                self.__logs.add_log(f"Invalid Image: {img_path}",
+                                    LogType.LOGINFO)
+        
+
     

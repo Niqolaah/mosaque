@@ -9,8 +9,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 from ..ParsedData import ParsedData
 from .Parser import Parser
-from ..Errors import ParseError, CloudflairError
+from ..Errors import ParseError, CloudflairError, APIError
 from ..LogRecorder import LogRecorder, LogType
+from ..sender.Api import Api
+
 
 from typing import Any
 import time
@@ -19,9 +21,10 @@ import random
 
 
 class Scrapper:
-    def __init__(self, logrecorder: LogRecorder, works: ParsedData):
+    def __init__(self, logrecorder: LogRecorder, works: ParsedData, api: Api):
         self.__works= works
         self.__logs = logrecorder
+        self.__api = api
 
     def scrap(self, visibility: bool = True):
         url = "https://www.artmajeur.com/agnes-couret"
@@ -160,31 +163,33 @@ class Scrapper:
             try:
                 cate_name = Parser.get_cate_name(categorie)
                 cate_link = Parser.get_cate_link(categorie)
+                if not "VENDU" in cate_name:
+                    self.__works.add_categorie(cate_name, cate_link)
             except ParseError:
                 self.__logs.add_log("Categorie name not found",
                                     LogType.LOGINFO)
                 cate_name = "NameError"
-            if not "VENDU" in cate_name:
-                self.__works.add_categorie(cate_name, cate_link)
-            # works_container_el = categorie.find_element(
-            #     By.CSS_SELECTOR, ".swiper-wrapper.d-flex")
-            # works_el = works_container_el.find_elements(By.XPATH, "./*")
-            # for work_el in works_el:
-            #     work_link = work_el.find_element(By.TAG_NAME, "a")
-            #     self.__works.add_work(categorie=cate_name,
-            #                           link=work_link.get_attribute("href"))
-
         driver.quit()
         sleep(2)
 
-    def download_all_imgs(self, visibility: bool):
-        for img in self.__works.get_imgs_list():
-            try:
-                self.download_work_img(img, visibility)
-            except Exception as e:
-                self.__logs.add_log((f"Cannot download {img['file_name']}"
-                                     f" at {img['link']}: {e}"),
-                                    LogType.LOGINFO)
+    def download_imgs(self, visibility: bool):
+        try:
+            existing_imgs_json = self.__api.get_imgs_info()["images"]
+            existing_imgs_name = [img["name"] for img in existing_imgs_json]
+
+            for img in self.__works.get_imgs_list():
+                if img["file_name"] not in existing_imgs_name:
+                    try:
+                        self.download_work_img(img, visibility)
+                    except Exception as e:
+                        self.__logs.add_log((f"Cannot download {img['file_name']}"
+                                            f" at {img['link']}: {e}"),
+                                            LogType.LOGINFO)
+                else:
+                    print(f"{img['file_name']} already in server")
+        except APIError as e:
+            self.__logs.add_log(e, LogType.LOGERROR)
+            raise APIError(e)
 
     def download_work_img(self, img_dict: dict[str, str],
                           visibility: bool) -> None:
@@ -193,7 +198,7 @@ class Scrapper:
         url = img_dict["link"]
         img_name = img_dict["file_name"]
         filename = os.path.join("imgs", img_name)
-
+        driver = None
         try:
             driver = self.__get_site(url, visibility=visibility)
             img = driver.find_element(By.TAG_NAME, "img")
@@ -205,15 +210,19 @@ class Scrapper:
         except CloudflairError:
             error_str = f"Cloudflair: Impossible to download {url}"
             self.__logs.add_log(error_str, LogType.LOGERROR)
-            os.remove(filename)
+            if os.path.exists(filename):
+                os.remove(filename)
             raise CloudflairError(error_str)
         except TimeoutException:
             error_str = f"Timeout: Impossible to download {url}"
             self.__logs.add_log(error_str, LogType.LOGERROR)
             os.remove(filename)
             raise TimeoutException(error_str)
+        except Exception as e:
+            raise Exception(e)
         finally:
-            driver.quit()
+            if driver:
+                driver.quit()
 
     def __get_site(self, url: str, visibility: bool, retries: int = 5, work_page:bool = False) -> Any:
         for attempt in range(retries):
@@ -225,7 +234,7 @@ class Scrapper:
                 options.add_argument("--window-position=-2000,0")
                 options.add_argument("--window-size=1920,1080")
 
-            driver = uc.Chrome(options=options, version_main=144)
+            driver = uc.Chrome(options=options, version_main=146)
             driver.set_page_load_timeout(30)
             if not visibility:
                 driver.minimize_window()
