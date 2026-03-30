@@ -35,7 +35,7 @@ class Scrapper:
             self.scrap_works(url, visibility)
             self.__logs.add_log(f"Scrapping finised in {time.time() - now}s",
                                 LogType.LOGSUCCESS)
-            self.download_all_imgs(visibility=True)
+            self.download_imgs(visibility=True)
             self.__works.print_work_list()
         except CloudflairError as e:
             raise CloudflairError(e)
@@ -132,15 +132,12 @@ class Scrapper:
                 try:
                     name = Parser.get_work_name_by_cate(work)
                     link = Parser.get_work_link_by_cate(work)
-
-                    print(f"name: {name}, link: {link}")
                 except ParseError:
                     error_str = "Works not found"
                     self.__logs.add_log(error_str, LogType.LOGERROR)
                     raise ParseError(error_str)
                 self.__works.add_work(categorie=cate_dict["name"],
-                                      link=link,
-                                      name=name)
+                                      link=link, name=name)
             driver.quit()
 
     def scrap_works_categories(self, url: str, visibility: bool) -> None:
@@ -177,10 +174,14 @@ class Scrapper:
             existing_imgs_json = self.__api.get_imgs_info()["images"]
             existing_imgs_name = [img["name"] for img in existing_imgs_json]
 
-            for img in self.__works.get_imgs_list():
+            img_list = self.__works.get_imgs_list()
+
+            for i, img in enumerate(img_list):
                 if img["file_name"] not in existing_imgs_name:
                     try:
                         self.download_work_img(img, visibility)
+                        self.__logs.add_log(f"Image successfully downloaded ({i}/{len(img_list)})",
+                                            LogType.LOGSUCCESS)
                     except Exception as e:
                         self.__logs.add_log((f"Cannot download {img['file_name']}"
                                             f" at {img['link']}: {e}"),
@@ -204,9 +205,6 @@ class Scrapper:
             img = driver.find_element(By.TAG_NAME, "img")
             with open(filename, "wb") as f:
                 f.write(img.screenshot_as_png)
-
-            self.__logs.add_log("Image successfully downloaded",
-                                LogType.LOGSUCCESS)
         except CloudflairError:
             error_str = f"Cloudflair: Impossible to download {url}"
             self.__logs.add_log(error_str, LogType.LOGERROR)
@@ -226,7 +224,7 @@ class Scrapper:
 
     def __get_site(self, url: str, visibility: bool, retries: int = 5, work_page:bool = False) -> Any:
         for attempt in range(retries):
-            time.sleep(random.uniform(3, 7))
+            time.sleep(random.uniform(1, 3))
             options = uc.ChromeOptions()
             options.add_argument(
                 "--disable-blink-features=AutomationControlled")
@@ -234,7 +232,7 @@ class Scrapper:
                 options.add_argument("--window-position=-2000,0")
                 options.add_argument("--window-size=1920,1080")
 
-            driver = uc.Chrome(options=options, version_main=146)
+            driver = uc.Chrome(options=options, version_main=145)
             driver.set_page_load_timeout(30)
             if not visibility:
                 driver.minimize_window()

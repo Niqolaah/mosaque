@@ -124,7 +124,7 @@ class DataSender:
         return -1
     
 
-    def is_valid_image(filepath: str) -> bool:
+    def is_valid_image(self, filepath: str) -> bool:
         if not os.path.exists(filepath):
             return False
 
@@ -140,17 +140,14 @@ class DataSender:
         
     def send_downloaded_imgs(self):
         for img in [imgs["file_name"] for imgs in self.__works.get_imgs_list()]:
-            img_path = os.path.join("imgs", img)
+            img_path = f"imgs/{img}"
             if self.is_valid_image(img_path):
                 try:
                     self.api.send_image(img_path)
+                    os.remove(img_path)
                 except Exception:
                     self.__logs.add_log(f"Cannot send image: {img_path}",
                                         LogType.LOGINFO)
-
-            else:
-                self.__logs.add_log(f"Invalid Image: {img_path}",
-                                    LogType.LOGINFO)
         
 
     

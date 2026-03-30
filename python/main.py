@@ -15,9 +15,9 @@ if __name__ == "__main__":
     scrapper = Scrapper(logs, data, api)
 
     try:
-        # scrapper.scrap(visibility=False)
-        data.init_last_registry("works_saves/[27-03-2026_08-26-38]_works_save.txt")
-        scrapper.download_imgs(visibility=True)
+        scrapper.scrap(visibility=False)
+        # data.init_last_registry("works_saves/[27-03-2026_08-26-38]_works_save.txt")
+        # scrapper.download_imgs(visibility=True)
         sender = DataSender(data, logs)
         sender.send_downloaded_imgs()
         # sender.post_scrapped_categories()

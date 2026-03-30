@@ -1,2 +1,19 @@
 [30/03/2026-09:57:02] Unknow Error: 'Response' object has no attribute 'code'
 [30/03/2026-10:28:18] Unknow Error: DataSender.is_valid_image() takes 1 positional argument but 2 were given
+[30/03/2026-15:40:27] Unknow Error: DataSender.is_valid_image() takes 1 positional argument but 2 were given
+[30/03/2026-15:41:41] Unknow Error: DataSender.is_valid_image() takes 1 positional argument but 2 were given
+[30/03/2026-15:43:28] Unknow Error: DataSender.is_valid_image() takes 1 positional argument but 2 were given
+[30/03/2026-15:44:03] Unknow Error: DataSender.is_valid_image() takes 1 positional argument but 2 were given
+[30/03/2026-15:44:51] Impossible to open ssh
+[30/03/2026-15:47:31] Impossible to open ssh
+[30/03/2026-15:51:38] Impossible to open ssh
+[30/03/2026-15:53:33] Impossible to open ssh
+[30/03/2026-15:53:33] Impossible to open ssh
+[30/03/2026-15:58:06] Impossible to open ssh
+[30/03/2026-15:58:06] Impossible to open ssh
+[30/03/2026-15:59:53] Impossible to open ssh: [Errno 2] No such file or directory: '~/.ssh/o2switch_key"'
+[30/03/2026-15:59:53] Impossible to open ssh: [Errno 2] No such file or directory: '~/.ssh/o2switch_key"'
+[30/03/2026-16:02:04] Impossible to open ssh: [Errno 2] No such file or directory: '/home/niqolas/.ssh/o2switch_key"'
+[30/03/2026-16:02:04] Impossible to open ssh: [Errno 2] No such file or directory: '/home/niqolas/.ssh/o2switch_key"'
+[30/03/2026-16:34:58] Unknow Error: 'Scrapper' object has no attribute 'download_all_imgs'
+[30/03/2026-16:51:12] Unknow Error: 'Scrapper' object has no attribute 'download_all_imgs'

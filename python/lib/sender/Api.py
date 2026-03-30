@@ -105,7 +105,8 @@ class Api:
             raise APIError(f"Impossible to connect api : {response.text}")
 
     def send_image(self, local_file: str):
-        remote_file = "public_html/images/image.jpg"
+        file_name = local_file.split("/")[-1].strip()
+        remote_file = f"public_html/sources/imgs/works/{file_name}"
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -114,20 +115,22 @@ class Api:
             ssh.connect(
                 hostname=self.__hostname,
                 username=self.__username,
-                key_filename=self.__key_path,
+                key_filename=os.path.expanduser(self.__key_path),
                 password=self.__password
             )
             sftp = ssh.open_sftp()
             try:
                 sftp.put(local_file, remote_file)
-            except Exception:
-                self.__logs.add_log("Impossible to send data",
-                      LogType.LOGERROR)
-                sftp.close()
-        except Exception:
-            self.__logs.add_log("Impossible to open ssh",
-                      LogType.LOGERROR)
-            ssh.close()
 
-        self.__logs.add_log("Data Successfuly sent",
+                self.__logs.add_log(f"Data {file_name} Successfuly sent",
                       LogType.LOGSUCCESS)
+            except Exception as e:
+                self.__logs.add_log(f"Impossible to send data: {e}",
+                      LogType.LOGERROR)
+            finally:
+                sftp.close()
+        except Exception as e:
+            self.__logs.add_log(f"Impossible to open ssh: {e}",
+                      LogType.LOGERROR)
+        finally:
+            ssh.close()

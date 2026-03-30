@@ -50,3 +50,270 @@ Stacktrace:
 #17 0x7f393b612f14 start_thread
 #18 0x7f393b69632c __clone3
 
+[30/03/2026-15:40:27] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:57081
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x5ba12d7cfa6a <unknown>
+#1 0x5ba12d1deab5 <unknown>
+#2 0x5ba12d221dff <unknown>
+#3 0x5ba12d220bc0 <unknown>
+#4 0x5ba12d215bc1 <unknown>
+#5 0x5ba12d26653e <unknown>
+#6 0x5ba12d265c2c <unknown>
+#7 0x5ba12d224cbf <unknown>
+#8 0x5ba12d225a81 <unknown>
+#9 0x5ba12d795a64 <unknown>
+#10 0x5ba12d798951 <unknown>
+#11 0x5ba12d78221e <unknown>
+#12 0x5ba12d79951e <unknown>
+#13 0x5ba12d768be0 <unknown>
+#14 0x5ba12d7bc9b8 <unknown>
+#15 0x5ba12d7bcb88 <unknown>
+#16 0x5ba12d7ce4de <unknown>
+#17 0x7f4f58c9caa4 <unknown>
+#18 0x7f4f58d29c6c <unknown>
+
+[30/03/2026-15:41:41] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:60299
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x578e4a035a6a <unknown>
+#1 0x578e49a44ab5 <unknown>
+#2 0x578e49a87dff <unknown>
+#3 0x578e49a86bc0 <unknown>
+#4 0x578e49a7bbc1 <unknown>
+#5 0x578e49acc53e <unknown>
+#6 0x578e49acbc2c <unknown>
+#7 0x578e49a8acbf <unknown>
+#8 0x578e49a8ba81 <unknown>
+#9 0x578e49ffba64 <unknown>
+#10 0x578e49ffe951 <unknown>
+#11 0x578e49fe821e <unknown>
+#12 0x578e49fff51e <unknown>
+#13 0x578e49fcebe0 <unknown>
+#14 0x578e4a0229b8 <unknown>
+#15 0x578e4a022b88 <unknown>
+#16 0x578e4a0344de <unknown>
+#17 0x7f8bbc69caa4 <unknown>
+#18 0x7f8bbc729c6c <unknown>
+
+[30/03/2026-15:43:28] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:44449
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x557bc0557a6a <unknown>
+#1 0x557bbff66ab5 <unknown>
+#2 0x557bbffa9dff <unknown>
+#3 0x557bbffa8bc0 <unknown>
+#4 0x557bbff9dbc1 <unknown>
+#5 0x557bbffee53e <unknown>
+#6 0x557bbffedc2c <unknown>
+#7 0x557bbffaccbf <unknown>
+#8 0x557bbffada81 <unknown>
+#9 0x557bc051da64 <unknown>
+#10 0x557bc0520951 <unknown>
+#11 0x557bc050a21e <unknown>
+#12 0x557bc052151e <unknown>
+#13 0x557bc04f0be0 <unknown>
+#14 0x557bc05449b8 <unknown>
+#15 0x557bc0544b88 <unknown>
+#16 0x557bc05564de <unknown>
+#17 0x7adac109caa4 <unknown>
+#18 0x7adac1129c6c <unknown>
+
+[30/03/2026-15:44:03] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:36419
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x5e0d38d1ea6a <unknown>
+#1 0x5e0d3872dab5 <unknown>
+#2 0x5e0d38770dff <unknown>
+#3 0x5e0d3876fbc0 <unknown>
+#4 0x5e0d38764bc1 <unknown>
+#5 0x5e0d387b553e <unknown>
+#6 0x5e0d387b4c2c <unknown>
+#7 0x5e0d38773cbf <unknown>
+#8 0x5e0d38774a81 <unknown>
+#9 0x5e0d38ce4a64 <unknown>
+#10 0x5e0d38ce7951 <unknown>
+#11 0x5e0d38cd121e <unknown>
+#12 0x5e0d38ce851e <unknown>
+#13 0x5e0d38cb7be0 <unknown>
+#14 0x5e0d38d0b9b8 <unknown>
+#15 0x5e0d38d0bb88 <unknown>
+#16 0x5e0d38d1d4de <unknown>
+#17 0x7b06e469caa4 <unknown>
+#18 0x7b06e4729c6c <unknown>
+
+[30/03/2026-15:44:50] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:40561
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x5fa19116ba6a <unknown>
+#1 0x5fa190b7aab5 <unknown>
+#2 0x5fa190bbddff <unknown>
+#3 0x5fa190bbcbc0 <unknown>
+#4 0x5fa190bb1bc1 <unknown>
+#5 0x5fa190c0253e <unknown>
+#6 0x5fa190c01c2c <unknown>
+#7 0x5fa190bc0cbf <unknown>
+#8 0x5fa190bc1a81 <unknown>
+#9 0x5fa191131a64 <unknown>
+#10 0x5fa191134951 <unknown>
+#11 0x5fa19111e21e <unknown>
+#12 0x5fa19113551e <unknown>
+#13 0x5fa191104be0 <unknown>
+#14 0x5fa1911589b8 <unknown>
+#15 0x5fa191158b88 <unknown>
+#16 0x5fa19116a4de <unknown>
+#17 0x7ee75a29caa4 <unknown>
+#18 0x7ee75a329c6c <unknown>
+
+[30/03/2026-15:44:50] Invalid Image: imgs/petite-josephine.png
+[30/03/2026-15:44:50] Invalid Image: imgs/de-tout-pres.png
+[30/03/2026-15:44:50] Invalid Image: imgs/hades.png
+[30/03/2026-15:44:50] Invalid Image: imgs/maimou.png
+[30/03/2026-15:44:50] Invalid Image: imgs/gare-au-gorille.png
+[30/03/2026-15:44:50] Invalid Image: imgs/grand-ganesh.png
+[30/03/2026-15:44:50] Invalid Image: imgs/instinct-sauvage-2.png
+[30/03/2026-15:44:50] Invalid Image: imgs/felin.png
+[30/03/2026-15:44:50] Invalid Image: imgs/petit-singe.png
+[30/03/2026-15:44:50] Invalid Image: imgs/adieu-belier.png
+[30/03/2026-15:44:50] Invalid Image: imgs/instinct-sauvage.png
+[30/03/2026-15:44:50] Invalid Image: imgs/ganesh.png
+[30/03/2026-15:44:51] Invalid Image: imgs/auto-portrait.png
+[30/03/2026-15:44:51] Invalid Image: imgs/vigile.png
+[30/03/2026-15:44:51] Invalid Image: imgs/froufrou.png
+[30/03/2026-15:44:51] Invalid Image: imgs/long-cou.png
+[30/03/2026-15:44:51] Invalid Image: imgs/de-nuit.png
+[30/03/2026-15:44:51] Invalid Image: imgs/jade.png
+[30/03/2026-15:44:51] Invalid Image: imgs/petite-chouette.png
+[30/03/2026-15:44:51] Invalid Image: imgs/ulule-4.png
+[30/03/2026-15:44:51] Invalid Image: imgs/majestic.png
+[30/03/2026-15:44:51] Invalid Image: imgs/jean-le-blanc.png
+[30/03/2026-15:44:51] Invalid Image: imgs/ebouriffe.png
+[30/03/2026-15:44:51] Invalid Image: imgs/plumes-de-pierre.png
+[30/03/2026-15:44:51] Invalid Image: imgs/irisee.png
+[30/03/2026-15:44:51] Invalid Image: imgs/gros-zibou.png
+[30/03/2026-15:44:51] Invalid Image: imgs/ulule-2.png
+[30/03/2026-15:44:51] Invalid Image: imgs/scarlett.png
+[30/03/2026-15:44:51] Invalid Image: imgs/long-bec-2.png
+[30/03/2026-15:44:51] Invalid Image: imgs/alisee.png
+[30/03/2026-15:44:51] Invalid Image: imgs/grozibou.png
+[30/03/2026-15:44:51] Invalid Image: imgs/maya.png
+[30/03/2026-15:44:51] Invalid Image: imgs/super-chouette.png
+[30/03/2026-15:44:51] Invalid Image: imgs/phenix.png
+[30/03/2026-15:44:51] Invalid Image: imgs/zephyr.png
+[30/03/2026-15:44:51] Invalid Image: imgs/cacatoes.png
+[30/03/2026-15:44:51] Invalid Image: imgs/long-bec.png
+[30/03/2026-15:44:51] Invalid Image: imgs/nocturne.png
+[30/03/2026-15:44:51] Invalid Image: imgs/ophelie.png
+[30/03/2026-15:44:51] Invalid Image: imgs/ulule.png
+[30/03/2026-15:44:51] Invalid Image: imgs/iguane-rouge.png
+[30/03/2026-15:44:51] Invalid Image: imgs/iguane-bleu.png
+[30/03/2026-15:44:51] Invalid Image: imgs/leon.png
+[30/03/2026-15:44:51] Invalid Image: imgs/raymann.png
+[30/03/2026-15:44:51] Invalid Image: imgs/hermann.png
+[30/03/2026-15:44:51] Invalid Image: imgs/age-de-pierre-iii.png
+[30/03/2026-15:44:51] Invalid Image: imgs/age-de-pierre-1.png
+[30/03/2026-15:44:51] Invalid Image: imgs/max.png
+[30/03/2026-15:44:51] Invalid Image: imgs/age-de-pierre-ii.png
+[30/03/2026-15:44:51] Invalid Image: imgs/entre-femme-et-oiseau.png
+[30/03/2026-15:44:51] Invalid Image: imgs/belle-dame.png
+[30/03/2026-15:47:25] Cannot download hades.png at https://medias.artmajeur.com/standard/19712209_1000035324.jpg?v=1770596683: Message: session not created: cannot connect to chrome at 127.0.0.1:49047
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x58021d575a6a <unknown>
+#1 0x58021cf84ab5 <unknown>
+#2 0x58021cfc7dff <unknown>
+#3 0x58021cfc6bc0 <unknown>
+#4 0x58021cfbbbc1 <unknown>
+#5 0x58021d00c53e <unknown>
+#6 0x58021d00bc2c <unknown>
+#7 0x58021cfcacbf <unknown>
+#8 0x58021cfcba81 <unknown>
+#9 0x58021d53ba64 <unknown>
+#10 0x58021d53e951 <unknown>
+#11 0x58021d52821e <unknown>
+#12 0x58021d53f51e <unknown>
+#13 0x58021d50ebe0 <unknown>
+#14 0x58021d5629b8 <unknown>
+#15 0x58021d562b88 <unknown>
+#16 0x58021d5744de <unknown>
+#17 0x72ec2fa9caa4 <unknown>
+#18 0x72ec2fb29c6c <unknown>
+
+[30/03/2026-15:47:31] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:60155
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x6426a6214a6a <unknown>
+#1 0x6426a5c23ab5 <unknown>
+#2 0x6426a5c66dff <unknown>
+#3 0x6426a5c65bc0 <unknown>
+#4 0x6426a5c5abc1 <unknown>
+#5 0x6426a5cab53e <unknown>
+#6 0x6426a5caac2c <unknown>
+#7 0x6426a5c69cbf <unknown>
+#8 0x6426a5c6aa81 <unknown>
+#9 0x6426a61daa64 <unknown>
+#10 0x6426a61dd951 <unknown>
+#11 0x6426a61c721e <unknown>
+#12 0x6426a61de51e <unknown>
+#13 0x6426a61adbe0 <unknown>
+#14 0x6426a62019b8 <unknown>
+#15 0x6426a6201b88 <unknown>
+#16 0x6426a62134de <unknown>
+#17 0x78443049caa4 <unknown>
+#18 0x784430529c6c <unknown>
+
+[30/03/2026-15:51:31] Cannot download hades.png at https://medias.artmajeur.com/standard/19712209_1000035324.jpg?v=1770596683: Message: session not created: cannot connect to chrome at 127.0.0.1:48327
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x562751615a6a <unknown>
+#1 0x562751024ab5 <unknown>
+#2 0x562751067dff <unknown>
+#3 0x562751066bc0 <unknown>
+#4 0x56275105bbc1 <unknown>
+#5 0x5627510ac53e <unknown>
+#6 0x5627510abc2c <unknown>
+#7 0x56275106acbf <unknown>
+#8 0x56275106ba81 <unknown>
+#9 0x5627515dba64 <unknown>
+#10 0x5627515de951 <unknown>
+#11 0x5627515c821e <unknown>
+#12 0x5627515df51e <unknown>
+#13 0x5627515aebe0 <unknown>
+#14 0x5627516029b8 <unknown>
+#15 0x562751602b88 <unknown>
+#16 0x5627516144de <unknown>
+#17 0x785b9aa9caa4 <unknown>
+#18 0x785b9ab29c6c <unknown>
+
+[30/03/2026-15:51:37] Cannot download duchesse.png at https://medias.artmajeur.com/standard/17844472_20240505-163045.jpg?v=1753617194: Message: session not created: cannot connect to chrome at 127.0.0.1:57069
+from session not created: This version of ChromeDriver only supports Chrome version 146
+Current browser version is 145.0.7632.159; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x5d23797fea6a <unknown>
+#1 0x5d237920dab5 <unknown>
+#2 0x5d2379250dff <unknown>
+#3 0x5d237924fbc0 <unknown>
+#4 0x5d2379244bc1 <unknown>
+#5 0x5d237929553e <unknown>
+#6 0x5d2379294c2c <unknown>
+#7 0x5d2379253cbf <unknown>
+#8 0x5d2379254a81 <unknown>
+#9 0x5d23797c4a64 <unknown>
+#10 0x5d23797c7951 <unknown>
+#11 0x5d23797b121e <unknown>
+#12 0x5d23797c851e <unknown>
+#13 0x5d2379797be0 <unknown>
+#14 0x5d23797eb9b8 <unknown>
+#15 0x5d23797ebb88 <unknown>
+#16 0x5d23797fd4de <unknown>
+#17 0x706e5ca9caa4 <unknown>
+#18 0x706e5cb29c6c <unknown>
+
