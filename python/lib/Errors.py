@@ -12,3 +12,7 @@ class DataError(Exception):
 
 class APIError(Exception):
     pass
+
+
+class MailError(Exception):
+    pass

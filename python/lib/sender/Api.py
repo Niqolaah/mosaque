@@ -3,6 +3,7 @@ import requests
 import paramiko
 import os
 from dotenv import load_dotenv
+import json
 
 from ..LogRecorder import LogRecorder, LogType
 from ..Errors import APIError
@@ -80,6 +81,25 @@ class Api:
         if response.status_code == 200:
             return True
         return False
+    
+    def update_work(self, data_to_post: dict[str, str]):
+        if "art_majeur_link" not in data_to_post:
+            raise APIError("Missing Art Majeur Link in data provided")
+        url = "https://agnescouret.fr/api/update_work.php"
+
+        data = {
+            'token': self.__token,
+            'data': json.dumps(data_to_post)
+            }
+        urllib3.disable_warnings()
+        response = requests.post(url, data=data, verify=False)
+        if response.status_code == 200:
+            return True
+        self.__logs.add_log(f"Update Work, request cannot be send: {response.text}",
+                            LogType.LOGINFO)
+        return False
+
+        
     
     def del_work_by_link(self, link: str) -> None:
         url = "https://agnescouret.fr/api/del_work.php"

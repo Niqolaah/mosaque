@@ -17,3 +17,33 @@
 [30/03/2026-16:02:04] Impossible to open ssh: [Errno 2] No such file or directory: '/home/niqolas/.ssh/o2switch_key"'
 [30/03/2026-16:34:58] Unknow Error: 'Scrapper' object has no attribute 'download_all_imgs'
 [30/03/2026-16:51:12] Unknow Error: 'Scrapper' object has no attribute 'download_all_imgs'
+[31/03/2026-10:45:19] Unknow Error: Message: timeout: Timed out receiving message from renderer: 29.382
+  (Session info: chrome=146.0.7680.164)
+Stacktrace:
+#0 0x55867fe2fb6a <unknown>
+#1 0x55867f842a32 <unknown>
+#2 0x55867f82a007 <unknown>
+#3 0x55867f829c16 <unknown>
+#4 0x55867f827731 <unknown>
+#5 0x55867f8280bf <unknown>
+#6 0x55867f837560 <unknown>
+#7 0x55867f851707 <unknown>
+#8 0x55867f8588db <unknown>
+#9 0x55867f828829 <unknown>
+#10 0x55867f85149c <unknown>
+#11 0x55867f8e06e1 <unknown>
+#12 0x55867f889c0f <unknown>
+#13 0x55867f88a9d1 <unknown>
+#14 0x55867fdf46b9 <unknown>
+#15 0x55867fdf75c1 <unknown>
+#16 0x55867fde0e29 <unknown>
+#17 0x55867fdf817e <unknown>
+#18 0x55867fdc74b0 <unknown>
+#19 0x55867fe1c578 <unknown>
+#20 0x55867fe1c74b <unknown>
+#21 0x55867fe2e1a3 <unknown>
+#22 0x7fe3ec81ef14 start_thread
+#23 0x7fe3ec8a232c __clone3
+
+[31/03/2026-11:17:25] Unknow Error: [Errno 2] No such file or directory: 'works_saves/[27-03-2026_08-26-38]_works_save.txt'
+[31/03/2026-11:18:18] Unknow Error: Missing Art Majeur Link in data provided
